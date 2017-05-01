@@ -1,0 +1,399 @@
+.home-content{
+	height: 90%;
+	overflow: scroll;
+}
+.home-content .home-top{
+	position: relative;
+	width: 100%;
+	background:url(../../img/home-back3.png) no-repeat;
+	background-size: cover;
+}
+.home-top .talk-div{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+.home-top .talk-div img{
+	margin-top: 5px;
+	margin-left: 4px;
+	width: 22px;
+	height: 20px;
+	
+}
+.home-content .home-top-usermsg{
+	width:20%;
+	position: relative;
+	z-index: 10;
+	margin: 0 auto;
+	padding-top: 35px;
+	padding-bottom: 10px;
+}
+.home-top-usermsg .usermsg-img{
+	overflow:hidden;
+	width:100%;
+}
+.home-top-usermsg .usermsg-img img{
+	display:inline-block;
+	width: 100%;
+	border-radius:50%;
+	border:2px solid #fff;
+}
+.home-top-usermsg a{
+	width: 100%;
+	text-align: center;
+	color: #000;
+	font-size: 13px;
+}
+.order-detail .detail-item{
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+.order-detail>.detail-item:first-child{
+	/*background: linear-gradient(to bottom,#ccc,#ccc) no-repeat right center / 1px 30px;*/
+}
+/*home-talkbox.html css*/
+
+.talk-item .item-pic{
+	float: left;
+	width: 20%;
+}
+.item-pic .item-img{
+	height: 40px;
+	width:40px;
+}
+.talk-item .item-name-time{
+	float: right;
+	width: 80%;
+	margin-top: 3px;
+}
+.item-name-time .item-shopname{
+	float: left;
+	color: #000;
+	font-size: 15px;
+}
+.item-name-time .item-time{
+	float: right;
+	color: #ccc;
+	font-size: 12px;
+}
+.talk-item .last-msg{
+	color: #ccc;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/*talkbox-talk.php css*/
+.mui-bar .head-img{
+	height: 20px;
+	width: 20px;
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+}
+.talk-content .talk-left{
+	width: 100%;
+	float: left;
+	padding: 10px;
+}
+.talk-left .left-head{
+	float: left;
+}
+.talk-left .left-head img,.talk-right .left-head img{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+.talk-left .talk-box,.talk-right .talk-box{
+	margin-top: 4px;
+	position: relative;
+	max-width: 60%;
+	padding: 8px;
+	border-radius: 5px;
+	background: #b4d3f7;
+}
+.talk-right .talk-box{
+	background:#fff;
+}
+.talk-left .talk-box{
+	float: left;
+    margin-left: 8px;
+}
+.talk-right .talk-box{
+	float: right;
+    margin-right: 8px;
+}
+.talk-left .talk-box:before,.talk-left .talk-box:after,.talk-right .talk-box:before,.talk-right .talk-box:after{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 8px;
+	width: 0;
+	height: 0;
+	border: 6px transparent solid;
+}
+.talk-left .talk-box:before{
+	left: -12px;
+	border-right-color: #b4d3f7;
+	z-index: 1;
+}
+.talk-left .talk-box:after{
+	left: -12px;
+	border-right-color:#b4d3f7;
+	z-index: 0;
+}
+.talk-box .box-text{
+	font-size: 13px;
+	color: #000;
+	word-wrap: break-word;
+}
+.talk-content .talk-right{
+	width: 100%;
+	float: right;
+	padding: 10px;
+}
+.talk-right .left-head{
+	float: right;
+}
+.talk-right .talk-box:before{
+	right: -12px;
+	border-left-color: #fff;
+	z-index: 1;
+}
+.talk-right .talk-box:after{
+	right: -12px;
+	border-left-color:#fff;
+	z-index: 0;
+}
+.talk-content .talk-center{
+	float: left;
+	width: 100%;
+}
+.talk-center .talk-time{
+	width: 40%;
+	background-color: #ccc;
+	margin-left: 30%;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.talk-content .talk-time span{
+	font-size: 10px;
+	color: #fff;
+}
+.talk-content .talk-input{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	z-index: 10;
+	background-color: #fff;
+	padding: 10px;
+}
+.talk-input #input-content{
+	background-color: #EFEFF4;
+	width: 80%;
+	float: left;
+	margin-bottom: 0;
+	border: none;
+	height: 30px;
+}
+.talk-input #input-button{
+	float: right;
+	height: 30px;
+	line-height: 16px;
+}
+.myAccount-profit{
+	width: 100%;
+	height: 80px;
+	background-color: #fff;
+	margin-top: 20px;
+	line-height: 80px;
+}
+.myAccount-profit .profit-left{
+    margin-left: 10px;
+    float: left;
+	
+}
+.myAccount-profit .profit-right{
+	float: right;
+	margin-right: 20px;
+}
+#right-money{
+	font-size: 20px;
+}
+.func-btn{
+	width: 100%;
+	margin-top: 10px;
+}
+.func-btn .deposit-record{
+	border: 1px solid #ccc; 
+	float: left;
+	margin-left: 10px;
+	width: 40%;
+	padding: 6px 12px;
+	text-align: center;
+	background-color: #4380a9;
+	border-radius: 3px;
+	color: #fff;
+}
+.func-btn #btn-deposit{
+	width: 40%;
+	/*padding: 10px 50px;*/
+	float: right;
+	margin-right: 10px;
+	font-size: 16px;
+}
+/*home-orderDetail.php css*/
+.order-details{
+	background-color: #fff;
+	margin-bottom: 10px;
+}
+.order-place,.order-msg,.order-time,.order-price,.order-deal{
+	width: 100%;
+	height: 36px;
+	padding: 3px 12px;
+	line-height: 30px;
+}
+.order-place .place-user{
+	font-size: 16px;
+	float: left;
+	
+}
+.order-place .place-contact{
+	float: right;
+	padding-left: 22px;
+	background: url(../../img/eval.png) no-repeat left center / 20px 20px;
+}
+.order-msg .order-number{
+	float: left;
+}
+.order-msg .order-state{
+	float: right;
+	color: #f00;
+}
+.order-commodityList{
+	height: 100px;
+	width: 100%;
+	padding: 10px;
+	background-color: #efeff4;
+}
+.order-commodityList .commodityList-left{
+	width: 80px;
+	float: left;
+}
+.order-commodityList .commodityList-left img{
+	width: 80px;
+	height: 80px;
+}
+.order-commodityList .commodityList-right{
+	float: right;
+	width: 70%;
+}
+.commodityList-right .name-unitPrice,.commodityList-right .note-count{
+	width: 100%;
+}
+.commodityList-right .note-count{
+	margin-top: 30px;
+}
+.name-unitPrice .commodity-name,.note-count .order-note{
+	width: 70%;
+	float: left;
+	word-break: break-word;
+}
+.name-unitPrice .commodity-name{
+	color: #000;
+}
+.note-count .order-note{
+	font-size: 12px;
+}
+.name-unitPrice .commodity-unitPrice,.note-count .order-count{
+	width: 30%;
+	float: right;
+}
+.order-price p{
+	text-align: right;
+	color: #000;
+}
+.order-price .total-price{
+	font-size: 18px;
+}
+.order-deal{
+	height: 41px;
+	padding-bottom: 8px;
+}
+.order-deal button{
+	border-radius: 50%;
+	float: right;
+}
+
+
+.mui-pull-top-tips {
+	position: absolute;
+	top: -20px;
+	left: 50%;
+	margin-left: -25px;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
+.mui-pull-top-wrapper {
+	width: 42px;
+	height: 42px;
+	display: block;
+	text-align: center;
+	background-color: #efeff4;
+	border: 1px solid #ddd;
+	border-radius: 25px;
+	background-clip: padding-box;
+	box-shadow: 0 4px 10px #bbb;
+	overflow: hidden;
+}
+.mui-pull-top-tips.mui-transitioning {
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+}
+.mui-pull-top-tips .mui-pull-loading {
+	/*-webkit-backface-visibility: hidden;
+	-webkit-transition-duration: 400ms;
+	transition-duration: 400ms;*/
+	
+	margin: 0;
+}
+.mui-pull-top-wrapper .mui-icon,
+.mui-pull-top-wrapper .mui-spinner {
+	margin-top: 7px;
+}
+.mui-pull-top-wrapper .mui-icon.mui-reverse {
+	/*-webkit-transform: rotate(180deg) translateZ(0);*/
+}
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #efeff4;
+	font-size: 15px;
+	line-height: 40px;
+	color: #777;
+}
+.mui-pull-top-canvas {
+	overflow: hidden;
+	background-color: #fafafa;
+	border-radius: 40px;
+	box-shadow: 0 4px 10px #bbb;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto;
+}
+.mui-pull-top-canvas canvas {
+	width: 40px;
+}
+.mui-slider-indicator.mui-segmented-control {
+	background-color: #efeff4;
+}
+

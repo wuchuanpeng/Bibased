@@ -1,0 +1,129 @@
+.commodity-content{
+	height: 100%;
+	width: 100%;
+}
+.commodity-content .content-header{
+	height: 25%;
+	width: 100%;
+	background: url(../img/home-back3.png) no-repeat center center / cover;
+	padding-left: 10px;
+	position: relative;
+}
+.content-header .shop-img{
+	position: relative;
+	top: 20%;
+	height: 60%;                   
+	width: 40%;
+	float: left;
+}
+.content-header .add-commodity{
+	height: 1em;
+	width: 4em;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	color: #000;
+}
+.content-header .shop-img img{
+	height: 100%;
+	width: 100%;
+}
+.content-header .shop-name{
+	font-size: 20px;             
+	width: 40%;
+	position: relative;
+	top: 45%;
+	float: left;
+	text-align: center;
+}
+#left-card{
+	width: 80px;
+	height: 100px;
+	position: absolute;
+	left: -80px;
+	top: 45%;
+	background: #fff;
+	z-index: 100;
+}
+#left-card #left-span{
+	width: 25px;
+	height: 50px;
+	font-size: 14px;
+	color: #fff;
+	position: absolute;
+	left: 80px;
+	top: 25px;
+	background: #000;
+	text-align: center;
+	line-height: 25px;
+}
+#left-card .card-item{
+	font-size: 16px;
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+.select-menu{
+	background-color: #ff0;
+	color: #f00;
+}
+
+#photo-select{
+	opacity: 0;
+	filter: alpha(opacity:0);
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+.commodity-content .content-list{
+	height: 65%;
+	position: relative;
+}
+.hotel-content{
+	background-color: #fff;
+}
+.hotel-content .hotel-detail{
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+}
+.hotel-detail .detail-left{
+	float: left;
+	border: 1px solid #ccc;
+}
+.hotel-detail .detail-left img{
+	width: 120px;
+	height: 80px;
+}
+.hotel-detail .detail-right{
+	float: left;
+	line-height: 80px;
+	padding:0 10px;
+}
+.detail-right .right-item{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+}
+.item1 .right-item:first-child{
+	float: left;
+}
+.item1 .right-item:last-child{
+	float: right;
+	font-size: 14px;
+	position: absolute;
+	right: 20px;
+}
+.item2 .right-item:first-child{
+	font-size: 14px;
+	float: left;
+	color: #f00;
+}
+.item2 .right-item:last-child{
+	float: right;
+	font-size: 14px;
+	position: absolute;
+	right: 20px;
+}

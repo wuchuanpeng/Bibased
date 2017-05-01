@@ -1,0 +1,395 @@
+/*商家上部分内容*/
+.bar-header .left-back{
+	color:#fff;
+	margin-top: 10px;
+}
+.bar-header{
+	position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
+    height: 44px;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow: hidden;
+	background-color: rgba(255,255,255,0);
+}
+.bar-header .res-title{
+	font-size: 18px;
+	float: left;
+	font-weight: 400;
+	margin-top: 13px;
+	opacity: 0;
+}
+.search-icon{
+	display: inline-block;
+	width: 38px;
+	height: 32px;
+	float:right;
+	margin-top: 6px;
+	
+	background:url(../image/search-icon2.png) no-repeat;
+}
+.res-bg{
+	width: 100%;
+	/*height: 180px;*/
+	position: relative;
+	/*z-index: 10;*/
+	background-color:#AF6C41;
+}
+.res-info {
+	height: 80%;
+	overflow: hidden;
+	border-bottom: 1px dashed #ccc;
+}
+.res-info .res-detail{
+	width: 80%;
+	height: 100%;
+	border-right: 1px solid #ccc;
+	float: left;
+}
+.res-info .info-img{
+	margin-left: 10%;
+	float: left;
+}
+.res-info .info-img img{
+	border-radius: 50%;
+	width: 100%;
+	height: 100%;
+}
+.res-info .res-txt{
+	height: 50%;
+	padding: 6% 3%;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+}
+#collect{
+	text-align: center;
+	height: 100%;
+	width: 20%;
+	float: right;
+	padding:0 3%;
+}
+.res-info .collect-star{
+	display: block;
+	width: 70%;
+	height: 52%;
+	margin-left: 15%;
+	background: url(../image/collect-graystar.png) no-repeat center center / cover;
+}
+.res-info .collect{
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-size: 12px;
+}
+.res-bg .res-activity{
+	height:20%;
+	position: relative;
+	padding-top: 3px;
+	padding-left: 14px;
+	 line-height: 1.8;
+}
+.res-activity .act-item{
+	width: 90%;
+	height: 90%;
+	position: absolute;
+	color: #fff;
+	font-size: 12px;
+   
+}
+.res-activity .act-num{
+	float: right;
+	color: #fff;
+	font-size: 12px;
+	margin-right: 10px;
+}
+.zindex{
+	z-index: 6;
+}
+.ishow{
+	display: block;
+}
+.res-thrtab{
+	width:100%;
+	padding-top: 10px;
+	overflow: hidden;
+}
+.res-thrtab .control-item{
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	line-height: 1.8;
+	width: 50%;
+	height: 40px;
+}
+.item-active{
+	border-bottom: 1px solid #0050EF;
+	color: #0050EF;
+}
+.ishide{
+	display: none;
+}
+/*底部样式*/
+.buycar{
+	width: 100%;
+	height: 60px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #404040;
+	z-index: 13;
+}
+.buycar #buycar{
+	height: 100%;
+	width: 100%;
+}
+.buycar .car-img{
+	width: 60px;
+	height: 60px;
+	background-color:#656566;
+	border-radius: 60px;
+	margin-top: -10px;
+	margin-left: 12px;
+	float: left;
+    z-index: 2;
+}
+.buycar .car-img img{
+	margin-left: -3px;
+	padding-top: -10px;
+}
+.buycar .car-img2{
+	width: 60px;
+	height: 60px;
+	background-color:#FED060;
+	border-radius: 60px;
+	margin-top: -10px;
+	margin-left: -60px;
+	float: left;
+}
+.buycar .car-img2 img{
+	margin-left: 10px;
+	margin-top: 8px;
+}
+.buycar .car-count{
+	position: absolute;
+	top: -10px;
+	left: 53px;
+}
+.buycar .car-doller{
+	float: left;
+	font-size: 24px;
+	color:#fff;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+/*.buycar .car-doller span.prepay{
+  margin-left: 6px;
+  font-size: 12px;
+}*/
+.buycar .car-txt{
+	color: #6F6F6F;
+	font-size: 14px;
+	margin-left: 10px;
+	position: absolute;
+	bottom: 0;
+	right: 100px;
+}
+/*.car-txt2{
+	display:inline-block;
+	color: #6F6F6F;
+	font-size: 14px;
+	margin-top: 32px;
+	margin-left: -80px;
+}*/
+/*.car-begin{
+	color: #6F6F6F;
+	float: right;
+	font-size:14px;
+	margin-top: -20px;
+	margin-right: 10px;
+}*/
+.car-begin2{
+	/*display:inline-block;*/
+	width: 80px;
+	height: 60px;
+	text-align: center;
+	background-color: #FED060;
+	position: absolute;
+	right:0px;
+	top:0px;
+	line-height: 60px;
+}
+/*左侧选项卡内容样式*/
+.mui-table-view-cell{
+	position: relative;
+}
+.ltitle{
+	font-size: 12px;
+	width: 100%;
+	height: 30px;
+	padding-left: 8px;
+	border-left: 2px solid #F0A30A;
+	background-color: #fff;
+	line-height: 30px;
+}
+.menu-img{
+	float: left;
+	margin-right: 10px;
+}
+.menu-name{
+	color: #000;
+}
+.msale,.praise{
+	
+	font-size: 12px;
+	
+	color: #C2C2C2;
+}
+.msale{
+	margin-right: 15px;
+	float: left;
+}
+.praise{
+	
+}
+.menu-price{
+	font-size: 20px;
+	color: #f00;
+	font-weight: 700;
+	
+}
+.menu-yprice{
+	font-size: 10px;
+}
+.menu-add,.menu-reduce{
+	width: 24px;
+	height: 24px;
+	border-radius: 24px;
+	text-align: center;
+	line-height: 24px;
+}
+.menu-add{
+	font-size: 20px;
+	background-color: #FFD162;
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}
+.menu-count{
+	position: absolute;
+	right: 46px;
+	bottom: 16px;
+}
+.menu-reduce{
+	color: #C3C3C3;
+	font-size: 13px;
+	border: 1px solid #ccc;
+	position: absolute;
+	right:66px ;
+	bottom: 16px;
+}
+/*弹出菜单*/
+.mui-backdrop{
+	z-index: 10;
+}
+.mui-popover{
+	width: 100%;
+	position: absolute;
+	bottom:60px;
+	/*max-height: 360px;*/
+	min-height: 200px;
+	z-index: 12;
+}
+.clear-carte{
+	font-size: 14px;
+	width: 100%;
+	text-align: right;
+}
+.carte{
+	width: 100%;
+	/*min-height: 200px;
+	max-height: 360px;*/
+	background-color: #fff;
+}
+.carte li{
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid #ccc;
+	line-height: 60px;
+	position: relative;
+}
+.carte li p{
+	float: left;
+	color: #000;
+}
+ .carte-name{
+	margin-left: 6px;
+}
+.carte-price{
+	margin-left:20%;
+	font-size: 18px;
+}
+.carte-yprice{
+	margin-left:10px;
+	font-size: 12px;
+}
+.carte-yprice span{
+	line-height: 1.6;
+}
+.carte-reduce,.carte-add{
+	width: 24px;
+	height: 24px;
+	border-radius: 24px;
+	text-align: center;
+	line-height: 24px;
+}
+ .carte-reduce{
+	color: #C3C3C3;
+	font-size: 13px;
+	border: 1px solid #ccc;
+	position: absolute;
+	right: 70px;
+	top: 17px;
+}
+.carte-count{
+	position: absolute;
+	right: 48px;
+	font-size: 18px;
+}
+.carte-add{
+	font-size: 20px;
+	background-color: #FFD162;
+	position: absolute;
+	right: 20px;
+	top: 16px;
+}
+/*住宿部分*/
+.hotel-bg{
+	width: 100%;
+	/*height: 200px;*/
+	background:url(../image/hotel-bg.png) no-repeat;
+	background-size: cover;/*让背景图填充整个容器*/
+	position: relative;
+}
+.hotel-name{
+	width: 100%;
+	height: 40px;
+	position: absolute;
+	bottom: 0;
+	background:linear-gradient(to bottom,rgba(225,222,217,0.4),rgba(0,0,0,0.4));
+	font-size: 16px;
+	color: #fff;
+	line-height: 40px;
+	padding-left: 14px;
+}
+.hotel-address{
+	margin-top: 20px;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+}

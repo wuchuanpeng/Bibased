@@ -1,0 +1,386 @@
+body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,input,form,a,p,textarea{
+	margin: 0;
+	padding: 0;
+}
+ol,ul,li{
+	list-style: none;
+}
+
+/*订单编辑的样式*/
+.mui-bar .edit{
+	color: #000;
+	font-size: 14px;
+    float: right;
+    position: relative;
+    top: 11px;
+    right: 20px;
+}
+/*结束*/
+#bgwhite{
+	background-color: #fff;
+}
+/*刷新和加载样式*/
+.mui-bar~.mui-content .mui-fullscreen {
+                top: 44px;
+                height: auto;
+            }
+            .mui-pull-top-tips {
+                position: absolute;
+                top: -20px;
+                left: 50%;
+                margin-left: -25px;
+                width: 40px;
+                height: 40px;
+                border-radius: 100%;
+            }
+            .mui-bar~.mui-pull-top-tips {
+                top: 24px;
+            }
+            .mui-pull-top-wrapper {
+                width: 42px;
+                height: 42px;
+                display: block;
+                text-align: center;
+                background-color: #efeff4;
+                border: 1px solid #ddd;
+                border-radius: 25px;
+                background-clip: padding-box;
+                box-shadow: 0 4px 10px #bbb;
+                overflow: hidden;
+            }
+            .mui-pull-top-tips.mui-transitioning {
+                -webkit-transition-duration: 200ms;
+                transition-duration: 200ms;
+            }
+            .mui-pull-top-tips .mui-pull-loading {
+                /*-webkit-backface-visibility: hidden;
+                -webkit-transition-duration: 400ms;
+                transition-duration: 400ms;*/
+
+                margin: 0;
+            }
+            .mui-pull-top-wrapper .mui-icon,
+            .mui-pull-top-wrapper .mui-spinner {
+                margin-top: 7px;
+            }
+            .mui-pull-top-wrapper .mui-icon.mui-reverse {
+                /*-webkit-transform: rotate(180deg) translateZ(0);*/
+            }
+            .mui-pull-bottom-tips {
+                text-align: center;
+                background-color: #efeff4;
+                font-size: 15px;
+                line-height: 40px;
+                color: #777;
+            }
+            .mui-pull-top-canvas {
+                overflow: hidden;
+                background-color: #fafafa;
+                border-radius: 40px;
+                box-shadow: 0 4px 10px #bbb;
+                width: 40px;
+                height: 40px;
+                margin: 0 auto;
+            }
+            .mui-pull-top-canvas canvas {
+                width: 40px;
+            }
+            .mui-slider-indicator.mui-segmented-control {
+                background-color: #efeff4;
+            }
+            .mui-control-content{
+                width: 100%;
+                height: 100%;
+            }
+            .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+                border-bottom: 0;
+            }
+            .mui-bar~.mui-pull-top-tips{
+                z-index: 1;
+            }
+
+/**/
+/**/
+.mui-table-view{
+	margin-top: 10px;
+}
+/*li中具体内容的样式*/
+.mui-table-view .li-cell{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.mui-table-view .shop-order{
+	overflow: hidden;
+	display: block;
+	padding-bottom: 5px;
+}
+.mui-table-view .shop-order .shop-icon{
+	margin-left: 10px;
+	border-radius: 40px;
+	margin-top: 10px;
+}
+.mui-table-view .shop-order h5{
+	display: inline-block;
+	position: relative;
+	top: -13px;
+	left: 5px;
+	color: #000;
+	
+}
+.mui-table-view .shop-order .forward{
+	position: relative;
+	top: -7px;
+	left: 5px;
+}
+.mui-table-view .shop-order span{
+	float: right;
+	position: relative;
+	top: 22px;
+	right: 10px;
+	color: #000;
+	font-size: 14px;
+}
+.mui-table-view .li-cell .order-detail{
+	display: block;
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+.mui-table-view .li-cell .order-detail .menu-bar{
+	padding-left: 55px;
+	display: inline-block;
+}
+.mui-table-view .li-cell .order-detail .menu-count{
+	display: inline-block;
+	float: right;
+	color: #8f8f94;
+	font-size: 14px;
+	padding-right: 2px;
+}
+.mui-table-view .li-cell .order-detail .menu-sum{
+	position: relative;
+	top: 10px;
+	left: 60%;
+	font-size: 12px;
+}
+.mui-table-view .li-cell .order-detail .menu-sum .menu-price{
+	color: #000;
+	font-weight: bold;
+	font-size: 13px;
+	margin-left: 5px;
+}
+.mui-table-view .li-cell .order-detail{
+	border-bottom: 1px solid #E1E1E1;
+}
+.mui-table-view .li-cell .menu-btn{
+	margin-top: 10px;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+/*结束*/
+/*评价界面关闭符*/
+.mui-content .seller-out{
+	width: 95%;
+	margin: 0 auto;
+	background-color: #fff;
+	margin-top: 20px;
+}
+/*商家配送*/
+.mui-content .seller-top{
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ccc;
+}
+.mui-content .seller-top .seller-icon{
+	border-radius: 40px;
+	margin-left: 10px;
+	margin-top: 15px;
+	float: left;
+}
+.mui-content .seller-top .seller-name{
+	float: left;
+	position: relative;
+	top: 18px;
+	left: 8px;
+}
+.mui-content .seller-top p{
+	float: left;
+	position: relative;
+	top: 38px;
+	left: -48px;
+	color: #000;
+}
+.mui-content .seller-top p span#seller-time{
+	margin-right: 10px;
+}
+.mui-content .seller-top .seller-correct{
+	font-size: 14px;
+	display: block;
+	position: absolute;
+	top: 35px;
+	right: 8px;
+}
+.mui-content .seller-top .seller-correct img{
+	margin-left: 3px;
+	position: relative;
+	top: 4px;
+}
+/*更正表取消样式*/
+ ul li{
+  		list-style: none;
+  		width: 100%;
+  	}
+ #time-btn 	a{
+  		color: #000;
+  	}
+  	.popover-view{
+  		width: 100%;
+  		height: 200px;
+  		background-color:#EFEFF4 ;
+  	}
+.popover-view .cancel-btn{
+	position: absolute;
+	bottom: -10px;
+	left: 0;
+	z-index: 10;
+}
+.popover-view .cancel-btn a{
+	display: block;
+	width: 100%;
+	height: 60px;
+	background: #0050EF;
+	text-align: center;
+	font-size: 20px;
+	line-height: 53px;
+}
+.popover-view .popover-time{
+	background-color: #fff;
+	padding: 10px;
+}
+.popover-view #time-group{
+	background:#fff;
+	padding-left: 20px;
+}
+.popover-view #time-group li{
+	padding: 10px;
+	font-size: 16px;
+}
+.popover-view #time-group li:first-child{
+	border-left: none;
+}
+/*配送评价*/
+.seller-access{
+	overflow: hidden;
+	width: 94%;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+}
+.seller-access h5{
+	text-align: center;
+	padding: 20px;
+}
+.seller-access .access-star{
+	overflow: hidden;
+	position: relative;
+	left: 50%;
+	margin-left: -92px;
+}
+.seller-access .access-star  a{
+	display: block;
+	width: 36px;
+	height: 36px;
+	float: left;
+}
+.access-unactive{
+	background: url(../image/access-gray.png);
+}
+ .access-active{
+	background: url(../image/access-yellow.png);
+}
+/*评论文字*/
+.access-slide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.hide{
+	display: none;
+}
+.mui-slider{
+	margin-top: 10px;
+}
+.mui-slider .mui-slider-item div{
+	width: 100%;
+	height: 140px;
+}
+.mui-slider .mui-slider-item div .comment{
+	width: 100px;
+	height:30px;
+	border: 1px solid #ccc;
+	border-radius:20px;
+	padding:5px;
+	text-align: center;
+	margin-left: 35px;
+	margin-top: 5px;
+}
+.comment-select{
+	color: #FED25F;
+	background-color: #FEFCF0;
+}
+/**/
+.gocomment{
+	padding-top: 20px;
+	background-color: #fff;
+	width: 95%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.gocomment .tocomment{
+	width: 94%;
+	margin: 0px auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 18px;
+}
+.gocomment .comment-text{
+	display: block;
+	width: 100%;
+	margin: 0px auto;
+	font-size: 14px;
+}
+.addimg{
+	display: block;
+	margin-top: 20px;
+}
+.comment-footer{
+}
+.comment-footer .footer-text{
+	float: left;
+	color: #000;
+	padding: 10px;
+}
+.comment-footer .footer-icon{
+	float: right;
+	border:1px solid #ccc;
+	padding-left: 6px;
+	padding-right: 6px;
+	border-radius: 10px;
+	margin-top: 8px;
+	margin-right: 6px;
+}
+.comment-footer .footer-icon img{
+	display: inline-block;
+	position: relative;
+	top: 3px;
+}
+.footer-icon-spe2{
+	background-color: #FDFDEF;
+	color: #FFBE33;
+}
+.footer-icon-spe1{
+	background-color:#F4F4F4;
+	color: #979797;
+}

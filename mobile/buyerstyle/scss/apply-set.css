@@ -1,0 +1,56 @@
+.apply-tab{
+	width: 100%;
+	padding-top: 10px;
+	background-color: #fff;
+	height: 60px;
+	margin-bottom: 10px;
+}
+.mui-segmented-control{
+	width: 90%;
+	margin: 0 auto;
+}
+.apply-tab-content{
+	position: relative;
+	overflow: hidden;
+}
+.apply-tab-content img{
+	width:35%;
+	/*height:60%;*/
+	float: left;
+	margin-top: 3%;
+}
+
+.apply-tab-content .tab-content{
+	float: left;
+	margin-left: 8px;
+	position: relative;
+}
+.tab-content li{
+	margin-top: 4%;
+}
+.apply-name{
+	font-size: 16px;
+}
+.apply-name{
+	font-size: 14px;
+}
+.apply-time{
+	font-size: 12px;
+	color: #ccc;
+}
+.apply-continue{
+	/*position: relative;
+	right: 20px;*/
+	font-size: 14px;
+}
+.apply-continue{
+	/*float: right;*/
+	position: absolute;
+	top: 30%;
+	right:1%;
+}
+.apply-right{
+	position: absolute;
+	top: 28%;
+	right: -10%;
+}

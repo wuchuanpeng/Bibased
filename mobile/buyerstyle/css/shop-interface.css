@@ -1,0 +1,70 @@
+/*user-shop home-collection界面的店铺链接样式*/
+
+.aaaa .mui-media-object{
+	height: 50px;
+	width: 60px;
+	max-width: 60px;
+	line-height: 50px;
+}
+
+.aaaa .aaaa-content{
+	padding-right: 0;
+}
+.aaaa .mui-media-body .shop-name{
+	font-weight: bold;
+	font-size: 15px;
+	float: left;
+	color: #000;
+}
+.aaaa .mui-media-body .shop-distance{
+	font-size: 12px;
+	float: right;
+	color: #000;
+}
+.aaaa .mui-media-body .shop-con{
+	font-size: 12px;
+	color: #000;
+	float: left;
+}
+.aaaa .mui-media-body .shop-spendtime{
+	font-size: 12px;
+	color: #000;
+	float: right;
+}
+.aaaa-content .shop-star{
+	height: 16px;
+}
+.shop-star .star-word{
+	font-size: 12px;
+	float: left;
+	line-height: 16px;
+	color: #000;
+}
+.star-active{
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	background: url(../img/full-star.png) no-repeat center center / 12px 12px;
+	float: left;
+}
+.star-unactive{
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	background: url(../img/zero-star.png) no-repeat center center / 12px 12px;
+	float: left;
+}
+.aaaa .shop-discount{
+	font-size: 12px;
+	color: #000;
+	padding: 5px;
+	margin-left: 65px;
+}
+.shop-discount .discount-item{
+	color: #000;
+	font-size: 12px;
+	height: 16px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
