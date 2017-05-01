@@ -48,7 +48,7 @@
 		<div class="mui-content">
 			<header class="bar-header">
 			    <a class="mui-icon mui-icon-arrowleft mui-pull-left left-back mui-action-back"></a>
-			    <h1 class="res-title">家常菜馆</h1>
+			    <h1 class="res-title">{$sellerInfo.S_ShopName}</h1>
 			    <span class="search-icon"></span> 
 			</header>
 			<div class="res-bg"id="res-bg">
@@ -56,9 +56,9 @@
 			  	   	<div id="info-res">
 				  	   	    <a class="res-detail clearfloat" id="res-detail" href="javascript:;">
 				  	   	  	<div class="info-img" id="info-img">
-					  	   	  	<img src="buyerstyle/image/shop-icon.jpg"/>
+					  	   	  	<img src="{$sellerInfo.S_ShopImgUrl}"/>
 				  	   	  	</div>
-						    	<span class="res-txt">家常菜馆</span>
+						    	<span class="res-txt">{$sellerInfo.S_ShopName}</span>
 						    	<span></span>
 						    	<span></span>
 				  	   	    </a>
@@ -68,11 +68,9 @@
 				    	</div>
 			  	   	</div>
 			    </div>    
-			    <a href="restaurant-detail.php"class="res-activity">
-			    	<div class="act-item zindex">新用户立减5元</div>
-			    	<div class="act-item ishide ">打折商品6折起</div>
-			    	<div class="act-item ishide">满10减1</div>
-			    	<span class="act-num">3个活动<span>></span></span>
+<!--			    <a href="restaurant-detail.php"class="res-activity">-->
+			    <a href="javascript:void(0);"class="res-activity" id = "discountInfo">
+
 			    </a>
 		    </div>
 		   
@@ -128,7 +126,9 @@
 	</body>
    	<script src="buyerstyle/js/mui.min.js"></script>
    	<script type="text/javascript" src="buyerstyle/js/jquery.js"></script>
-	<script type="text/javascript">
+    <script src="buyerstyle/js/func.js"></script>
+    <script type="text/javascript">
+        var sid = "{$sid}";
 		document.getElementById("info-img").style.height=window.innerWidth*0.15+"px";
 		document.getElementById("info-img").style.width=window.innerWidth*0.15+"px";
 		document.getElementById("info-res").style.height=window.innerWidth*0.15+"px";
@@ -152,35 +152,81 @@
           document.getElementById('hotel-bg').style.height=window.innerWidth*(2/3)+'px';
 		//取消菜单
 		//收藏
-		var ontrue=0;
-		var collect=document.getElementById('collect');
+		var ontrue= {$sellerInfo.isCollection};
+		//收藏初始化
+        if(ontrue > 0){
+            document.getElementById('collect-starx').style.background='url(buyerstyle/image/collect-activestar.png) no-repeat center center / cover';
+            document.getElementById('collect-txt').innerHTML='已收藏';
+        }else{
+            document.getElementById('collect-starx').style.background='url(buyerstyle/image/collect-graystar.png) no-repeat center center / cover';
+            document.getElementById('collect-txt').innerHTML='收藏';
+        }
+        var collect=document.getElementById('collect');
 		collect.addEventListener('tap',function(){
-			if(ontrue==0){
+			if(ontrue == 0){
 				document.getElementById('collect-starx').style.background='url(buyerstyle/image/collect-activestar.png) no-repeat center center / cover';
 			    document.getElementById('collect-txt').innerHTML='已收藏';
 			    ontrue=1;
-			}else{
+                }else{
 				document.getElementById('collect-starx').style.background='url(buyerstyle/image/collect-graystar.png) no-repeat center center / cover';
 			    document.getElementById('collect-txt').innerHTML='收藏';
 			    ontrue=0;
-			}	
-		});
-		//活动轮播
-		var activi=mui('.act-item');
+			}
+
+			var option = {
+			  isCollection: ontrue,
+			  sid:sid
+            };
+            doajax("admin.php?controller=usershop&method=setCollection",option,'text',function (data) {
+               // console.info(data);
+            });
+
+        });
+        //设定优惠信息内容
+        var discountloaded = false;
+        var discountOption = {
+            sid:sid
+        };
+        doajax("admin.php?controller=usershop&method=getDiscountBySID",discountOption,'json',function (data) {
+            console.info(data);
+            for (var i = 0; i < data.length; i++) {
+                var discount = data[i];
+                var str;
+                if (discount.D_Type == 1) {
+                    str = '满' +discount.D_Type1Full +'减' +discount.D_Type1Reduce;
+                } else {
+                    str = '打折商品' +discount.D_Type2Reduce*10 +'折起';
+                }
+                if (i == 0) {
+
+                    $("#discountInfo").append('<div class="act-item zindex">' + str + '</div>');
+                }else {
+                    $("#discountInfo").append('<div class="act-item ishide">' + str + '</div>');
+                }
+            }
+            $("#discountInfo").append('<span class="act-num">' +data.length + '个活动</span>');
+            discountloaded = true;
+
+        });
+
 		//mui.toast(activi.length);
 		var num=0;
 		setInterval(function(){
-			for(var i=0;i<activi.length;i++){
-				activi[i].classList.remove('zindex');
-				activi[i].classList.add('ishide');
-			}
+		    if (discountloaded) {
+                //活动轮播
+                var activi=mui('.act-item');
+                for(var i=0;i<activi.length;i++){
+                    activi[i].classList.remove('zindex');
+                    activi[i].classList.add('ishide');
+                }
 				activi[num].classList.add('zindex');
 				activi[num].classList.remove('ishide');
-				
+
 			    num++;
 			    if(num>activi.length-1){
 			    	num=num%activi.length;
 			    }
+            }
 		},1500);
 		
 		//切换顶部选项卡

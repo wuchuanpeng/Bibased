@@ -55,7 +55,6 @@ function sqlReg(){
 		// console.log(msg);
 		if(msg['isexist']==1){
 			mui.toast("该号码已被注册");
-			document.getElementById("code_image").src="buyerstyle/getcode.php?code_type=3&width=100&height=35&code_num=4";
 		}else{
 			mui.alert("注册成功");
 			window.location.href="admin.php";
@@ -113,6 +112,43 @@ function sqlModPwd(oldpwd,newpwd){
 			window.location.href="admin.php";
 		}
 	});
+}
+
+/**
+ * approx distance between two points on earth ellipsoid
+ * @param {Object} lat1
+ * @param {Object} lng1
+ * @param {Object} lat2
+ * @param {Object} lng2
+ */
+function getFlatternDistance(lat1,lng1,lat2,lng2){
+
+    var f = (lat1 + lat2) / 2 * Math.PI / 180.0;
+    var g = (lat1 - lat2) / 2 * Math.PI / 180.0;
+    var l = (lng1 - lng2) / 2 * Math.PI / 180.0;
+
+    var sg = Math.sin(g);
+    var sl = Math.sin(l);
+    var sf = Math.sin(f);
+
+    var s,c,w,r,d,h1,h2;
+    var a = 6378137.0;
+    var fl = 1/298.257;
+
+    sg = sg*sg;
+    sl = sl*sl;
+    sf = sf*sf;
+
+    s = sg*(1-sl) + (1-sf)*sl;
+    c = (1-sg)*(1-sl) + sf*sl;
+
+    w = Math.atan(Math.sqrt(s/c));
+    r = Math.sqrt(s*c)/w;
+    d = 2*w*a;
+    h1 = (3*r -1)/2/c;
+    h2 = (3*r +1)/2/s;
+
+    return d*(1 + fl*(h1*sf*(1-sg) - h2*(1-sf)*sg));
 }
 
 

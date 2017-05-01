@@ -82,32 +82,7 @@
 						</ul>
 						<!--数据列表-->
 						<ul class="mui-table-view mui-table-view-chevron" id="shop-content">
-							<li class="mui-table-view-cell aaaa">
-								<a class="aaaa-content" style="padding-right:15px;">
-									<img class="mui-media-object mui-pull-left shop-img" src="buyerstyle/img/headimg.jpeg">
-									<div class="mui-media-body">
-										<div class="clearfloat">
-											<span class="shop-name">农家小馆</span>
-											<span class="shop-distance">2.6km</span>
-										</div>
-										<div class="clearfloat">
-											<span class="shop-con">月售350单</span>
-											<!-- <span class="shop-spendtime">43分钟</span> -->
-										</div>
-										<div class="shop-star clearfloat">
-			                    			<span class="star-word">评分:</span>
-			                    			<span class="star-active"></span>
-			                    			<span class="star-active"></span>
-			                    			<span class="star-active"></span>
-			                    			<span class="star-unactive"></span>
-			                    			<span class="star-unactive"></span>
-			                    		</div>
-									</div>
-									<div class="shop-discount">
-										<p class="discount-item">新用户立减10元</p>
-									</div>
-								</a>
-							</li>
+
 						</ul>
 					</div>
 				</div> 
@@ -152,8 +127,11 @@
 	</body>
 	<script src="buyerstyle/js/mui.min.js"></script>
 	<script src="buyerstyle/js/jquery.js"></script>
+    <script src="buyerstyle/js/func.js"></script>
 	<script type="text/javascript">
-		
+		var currentLat;
+		var currentLng;
+		var locFlag = false;
 		var gallery = mui('.mui-slider');
 		gallery.slider({
 		  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
@@ -174,9 +152,9 @@
 		});
 		
 		//监听shop-content下所有的aaaa的点击事件,跳转进入店铺
-		mui("#shop-content").on("tap",".aaaa-content",function(){
-			var id=this.getAttribute("id");//获取某个点击的mui-tab-item的id,进而获取当前div的id
-			window.location.href="admin.php?controller=usershop&method=clickRestaurant";
+		mui("#shop-content").on("tap",".aaaa",function(){
+			var sid=this.getAttribute("sid");//获取某个点击的mui-tab-item的id,进而获取当前div的id
+			window.location.href="admin.php?controller=usershop&method=clickRestaurant&sid="+sid;
         });
 		
 		var itemState=0;
@@ -260,7 +238,48 @@
 		
 
 	</script>
+    <script type="text/javascript">
+        document.getElementById("shop-top").addEventListener('tap',function(){
+            window.location.href="http://apis.map.qq.com/tools/locpicker?search=1&type=0&backurl=http://localhost/Bibased/mobile/admin.php?controller=usershop&method=index&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp";
+        });
+        function getRequest() {
+            var url = window.location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        var Request = new Object();
+        Request = getRequest();
+        var name,latng,addr,city; //具体地址,坐标,地址,城市
+        name = Request['name'];
+        latng = Request['latng'];
+        addr = Request['addr'];
+        city = Request['city'];
+
+        window.addEventListener('message', function(event) {
+            // 接收位置信息
+            var loc = event.data;
+            if(name=='undefined'){
+                document.getElementById("autoaddr").innerHTML=loc.city;
+            }else{
+                document.getElementById("autoaddr").innerHTML=city;
+            }
+            console.info(loc);
+            locFlag = true;
+            currentLat = loc.lat;
+            currentLng = loc.lng;
+        }, false);
+
+    </script>
 	<script type="text/javascript">
+        var LIST_NUM = 10;
 		//下拉刷新时将搜索栏隐藏
 		var headDiv1=document.getElementById("header-div1");
 		mui.init({
@@ -275,7 +294,19 @@
 				}
 			}
 		});
-		
+		$(function () {
+		    loadInit();
+
+        });
+
+		function loadInit() {
+            if (!locFlag){
+                setTimeout(loadInit,200);
+            }else{
+                pullupRefresh();
+            }
+        }
+
 		function hidhead(){
 			headDiv1.style.display="none"; 
 			pulldownRefresh();
@@ -291,44 +322,83 @@
 		var count = 0;
 		//上拉加载具体业务实现
 		function pullupRefresh() {
-			setTimeout(function() {
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
-				var table = document.body.querySelector('.mui-table-view');
-				var cells = document.body.querySelectorAll('.aaaa');
-				
-				for (var i = cells.length, len = i + 20; i < len; i++) {
-					var li = document.createElement('li');
-					li.className = 'mui-table-view-cell mui-media aaaa';
-					li.id="shopcontent"+i;
-					li.innerHTML = '<a class="aaaa-content" style="padding-right:15px;">'+
-										'<img class="mui-media-object mui-pull-left shop-img" src="buyerstyle/img/headimg.jpeg">'+
-										'<div class="mui-media-body">'+
-											'<div class="clearfloat">'+
-												'<span class="shop-name">山水怡情'+(i+1)+'</span>'+
-												'<span class="shop-distance">2.6km</span>'+
-											'</div>'+
-											'<div class="clearfloat">'+
-												'<span class="shop-con">月售350单</span>'+
-												// '<span class="shop-spendtime">43分钟</span>'+
-											'</div>'+
-											'<div class="shop-star clearfloat">'+
-				                    			'<span class="star-word">评分:</span>'+
-				                    			'<span class="star-active"></span>'+
-				                    			'<span class="star-active"></span>'+
-				                    			'<span class="star-active"></span>'+
-				                    			'<span class="star-unactive"></span>'+
-				                    			'<span class="star-unactive"></span>'+
-				                    		'</div>'+
-										'</div>'+
-										'<div class="shop-discount">'+
-											'<p class="discount-item">满10减3</p>'+
-											'<p class="discount-item">新用户立减10元</p>'+
-										'</div>'+
-									'</a>';
-					table.appendChild(li);
-				}
-			}, 1500);
+            //初始化填入内容
+            var option = {
+                startItem:count * LIST_NUM,
+                listNum:LIST_NUM
+            };
+            doajax("admin.php?controller=usershop&method=getSellerList",option,'json',function (data) {
+                console.info(data);
+                if (data.length == 0) {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+                }else {
+                    setTimeout(sellerLoading(data),1500);
+                }
+                count++;
+            });
+
+
 		}
+
+		function sellerLoading(data) {
+            var addItemNum = data.length;
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh(addItemNum == 0); //参数为true代表没有更多数据了。
+            var table = document.body.querySelector('.mui-table-view');
+            var cells = document.body.querySelectorAll('.aaaa');
+            var k = 0;
+            for (var i = cells.length, len = i + addItemNum; i < len; i++) {
+                var item = data[k++];
+                var li = document.createElement('li');
+                li.className = 'mui-table-view-cell mui-media aaaa';
+                li.id="shopcontent"+i;
+                li.setAttribute("sid" , item.S_ID);
+                var loc = "0.5";
+                var targats = item.S_Coordinate;
+                var targat = targats.split(",");
+                if (locFlag) {
+                    loc = getFlatternDistance(currentLat,currentLng,parseFloat(targat[0]),parseFloat(targat[1])).toFixed(2);
+                }
+                var str = '<a class="aaaa-content" style="padding-right:15px;">'+
+                    '<img class="mui-media-object mui-pull-left shop-img" src="' + item.S_ShopImgUrl +'">'+
+                    '<div class="mui-media-body">'+
+                    '<div class="clearfloat">'+
+                    '<span class="shop-name">'+ item.S_ShopName+'</span>'+
+                    '<span class="shop-distance">' + loc + 'km</span>'+
+                    '</div>'+
+                    '<div class="clearfloat">'+
+                    '<span class="shop-con">月售' + item.orderCount + '单</span>'+
+                    // '<span class="shop-spendtime">43分钟</span>'+
+                    '</div>'+
+                    '<div class="shop-star clearfloat">'+
+                    '<span class="star-word">评分:</span>';
+                    for (var j = 0; j < item.score; j++){
+                        str += '<span class="star-active"></span>';
+                    }
+                    for (var l = 0; l < 5 - item.score; l++){
+                        str += '<span class="star-unactive"></span>';
+                    }
+
+                str +='</div>'+
+                    '</div>'+
+                    '<div class="shop-discount">';
+                var discounts = item.discount;
+                console.info(discounts);
+                for (var m = 0; m < discounts.length; m++) {
+                    var discount = discounts[m];
+                    if (discount.D_Type == 1) {
+                        str += '<p class="discount-item">满' +discount.D_Type1Full +'减' +discount.D_Type1Reduce +'</p>';
+                    } else {
+                        str += '<p class="discount-item">打折商品' +discount.D_Type2Reduce +'起</p>';
+                        break;
+                    }
+                }
+
+                str +='</div>'+
+                    '</a>';
+                li.innerHTML = str;
+                table.appendChild(li);
+            }
+        }
 	</script>
 	<script type="text/javascript">
 		var menuWrapper = document.getElementById("menu-wrapper");
@@ -409,7 +479,9 @@
 					document.getElementById("autoaddr").innerHTML=loc.city;
 				}else{
 					document.getElementById("autoaddr").innerHTML=city;
-				}        
+				}
+				console.info(loc);
+
 			}, false);
 	
 	</script>
