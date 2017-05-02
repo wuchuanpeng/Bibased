@@ -38,7 +38,8 @@
             $result = DB::findOne($sql);
             //是否收藏
             $sql2 = "SELECT count(*) `count` FROM r_collection,r_buyer WHERE B_Status = 1 AND L_Status = 1 AND L_BID = B_ID AND B_UID = $uid AND L_FID = $sid ";
-            $result['isCollection'] = DB::findOne($sql2)['count'];
+            $result2 = DB::findOne($sql2);
+            $result['isCollection'] = $result2['count'];
             return $result;
         }
 
@@ -50,7 +51,8 @@
          */
         function setCollection ($sid, $uid, $isCollection) {
             $sql = "SELECT B_ID FROM r_buyer WHERE B_UID = $uid AND B_Status = 1 ";
-            $bid = DB::findOne($sql)['B_ID'];
+            $result = DB::findOne($sql);
+            $bid = $result['B_ID'];
             $table = "r_collection";
             $arr = array();
             if ($isCollection == 1) {
