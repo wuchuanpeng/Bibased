@@ -1,11 +1,20 @@
 <?php 
 	class sellercommodityModel{
-
+        /**
+         * 商家信息查询
+         * @param $uid 商家在登录表的id
+         * @return mixed
+         */
 		function sellerMsg($uid){
 			$sql="select * from R_Seller where S_Status>0 and S_UID=".$uid;//查出保存在商家表中的店铺照片和店铺名称
 			return DB::findOne($sql);
 		}
-//查询店铺信息
+        /**
+         * 查询店铺信息
+         * @param $uid 商家在登录表的id
+         * @param $shopType 要返回的店铺信息类型 hotel或者agrproduct
+         * @return mixed 返回的一条店铺信息
+         */
 		function shopMsg($uid,$shopType){
 			$sellermsg=self::sellerMsg($uid);
 			$sid=$sellermsg['S_ID'];
@@ -17,7 +26,13 @@
 				return $shopMsg[0];
 			}
 		}
-//查询多条语句封装
+        /**
+         * 查询多条语句封装
+         * @param $table 表名
+         * @param $where 条件
+         * @param $sort 排序方式
+         * @return mixed
+         */
 		function dataQuery($table,$where,$sort){
 			$sql="select * from `".$table."` where ".$where." order by ".$sort;
 			return DB::findAll($sql);

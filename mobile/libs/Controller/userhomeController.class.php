@@ -13,6 +13,10 @@
 				$this->userId=isset($_SESSION['buyer_id'])?$_SESSION['buyer_id']:array();
 			}
 		}
+
+        /**
+         * 加载user-home的页面
+         */
 		public function index(){
 			$userObj=M('userhome');
 			$back=$userObj->userMsg($this->userId);
@@ -20,6 +24,10 @@
 							   'userName' => $back['B_Name']));
 			VIEW::display('buyer/user-home.php');
 		}
+
+        /**
+         * 修改用户信息
+         */
 		function userMessage(){
 			$userObj=M('userhome');
 			$back=$userObj->userMsg($this->userId);

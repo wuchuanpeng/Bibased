@@ -11,6 +11,10 @@
 	
  
 	<body>
+        <header class="mui-bar mui-bar-nav" style="background-color: rgba(255,255,255,0.9);text-align: center;">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backpage" style="color: #000000"></a>
+            <h1 class="mui-title">我的订单</h1>
+        </header>
 		<div class="mui-content" id="detail-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
 				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">

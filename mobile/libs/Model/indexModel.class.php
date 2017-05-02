@@ -15,9 +15,11 @@
 					if($result['U_Right']==0){
 						$_SESSION['seller_id']=$result['U_ID'];//登录者在用户表中的id
 						$_SESSION['loginseller']=$acc;//登录名,即手机号码
+
 					}else if($result['U_Right']==1){
 						$_SESSION['buyer_id']=$result['U_ID'];//登录者在用户表中的id
 						$_SESSION['loginuser']=$acc;//登录名,即手机号码
+
 					}
 					$back['isaccount']=1;
 				}else{

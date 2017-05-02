@@ -1,4 +1,4 @@
-<?php header("Content-type: text/html; charset=utf-8");?>
+<?php header("Content-type: text/html; charset=utf-8"); ?>
 <html>
 
 	<head>
@@ -61,6 +61,7 @@
 
 		
 		//下拉加载具体业务实现
+
 		function pulldownRefresh() {
 		setTimeout(function() {
 			var table = document.body.querySelector('.pull-content');

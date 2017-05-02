@@ -32,12 +32,9 @@
            		 <!-- 头像和名字在页面的显示 -->
                 <div class="home-top-usermsg">
                     <div class="usermsg-img">
-                        <img src="buyerstyle/img/headimg.jpeg" />
+                        <img src="{$sellerImg}" />
                     </div>
-                    <a href="home-msgmod.php">LILI ></a>
-                </div> 
-                <div class="talk-div" onclick="window.location.href='home-talkbox.php'">
-                	<img src="buyerstyle/img/conver1.png"/>
+                    <a href="admin.php?controller=sellerhome&method=location_msgMod">{$sellerName} ></a>
                 </div>
             </div>
             <ul class="home-orderManage mui-table-view" style="margin-bottom: 10px;"> 
@@ -46,15 +43,15 @@
            		</li>  
            		<li class="" style="height: 43px;line-height: 43px;">
            			<ul class="order-detail">
-           				<a href="" class="detail-item"><li>已完成</li></a>
-           				<a href="" class="detail-item"><li>已发货</li></a>
+           				<a href="admin.php?controller=sellerhome&method=location_orderForm" class="detail-item"><li>已完成</li></a>
+           				<a href="admin.php?controller=sellerhome&method=location_orderForm" class="detail-item"><li>已发货</li></a>
            			</ul>
            		</li>
             </ul> 
             <div class="home-list">
                 <ul class="mui-table-view list-myfunc">
                     <li class="mui-table-view-cell mui-collapse-content">
-                        <a class="mui-navigate-right" href="home-myAccount.php">我的账户</a>
+                        <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_myAccount">我的账户</a>
                     </li>
                     <li class="mui-table-view-cell mui-collapse-content">
                         <a class="mui-navigate-right" href="">认证信息</a>

@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>登录</title>
 		<link href="buyerstyle/css/mui.min.css" rel="stylesheet" />
-
+        <script>
+        </script>
 		<style>
 			/*.area {
 				margin: 20px auto 0px auto;

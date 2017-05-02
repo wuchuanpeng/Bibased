@@ -5,8 +5,13 @@
 		}
 
 		function index(){
-			$this->loginuser = isset($_SESSION['reload'])?$_SESSION['loginuser']:"";
-			VIEW::assign(array('loginuser' => $this->loginuser));
+		    if($_SESSION['loginuser']!=""){
+                $this->loginuser = isset($_SESSION['reload'])?$_SESSION['loginuser']:"";
+                VIEW::assign(array('loginuser' => $this->loginuser));
+            }else{
+                $this->loginuser = isset($_SESSION['reload'])?$_SESSION['loginseller']:"";
+                VIEW::assign(array('loginuser' => $this->loginuser));
+            }
 			VIEW::display('buyer/login.php');
 			
 		}
