@@ -78,5 +78,31 @@
             $discount = DB::findAll($sql3);
             return $discount;
         }
+
+        /**
+         * 获取商品信息
+         * @param $sid
+         */
+        function getProducts ($sid) {
+            //1.查询所有商品类型
+            $sql = "SELECT K_ID,K_Name FROM `r_productkind`, r_farmshop WHERE K_Status = 1 AND F_Status = 1 AND K_FID = F_ID AND F_SID = $sid";
+            $productkis = DB::findAll($sql);
+            foreach ($productkis as $key => $productki) {
+                $kid = $productki['K_ID'];
+                //获取该类型下面的所有商品
+                $sql = "SELECT P_ID,P_Name,P_Price,P_Remain, L_ImgUrl FROM r_product, r_uploadfiles  WHERE P_Status = 1 AND P_ID = L_SpecificID AND L_Status = 1 AND L_Type = 0 AND P_KID = $kid";
+                $products = DB::findAll($sql);
+                //获取商品的销售量
+                foreach ($products as $key2 => $product) {
+                    $pid = $product['P_ID'];
+                    $sql = "SELECT COUNT(*) `count` FROM r_agrorder WHERE A_Status = 1 AND A_PID = $pid";
+                    $counts = DB::findOne($sql);
+                    $count = $counts['count'];
+                    $products[$key2]['count'] = $count;
+                }
+                $productkis[$key]["products"] = $products;
+            }
+            return $productkis;
+        }
     }
  ?>

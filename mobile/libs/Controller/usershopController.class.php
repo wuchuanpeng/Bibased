@@ -52,5 +52,14 @@
             $result = $this -> userObj -> getDiscountBySID($_POST['sid']);
             echo json_encode($result);
         }
+
+        /**
+         * 获取商品信息
+         */
+        function getProducts() {
+            $sid  = $_POST["sid"];
+            $result = $this -> userObj -> getProducts($sid);
+            echo json_encode($result);
+        }
 	}
  ?>
