@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="buyerstyle/css/mui.min.css" rel="stylesheet" />
 	</head>
      <style type="text/css">
 			.mui-preview-image.mui-fullscreen {
@@ -172,22 +172,22 @@
 		<div class="mui-content">
 			<div class="mui-content-padded"style="margin: 0 auto;padding:6px 6px;">
 				<p>
-					<img src="../image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
-					<img src="../image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
+					<img src="buyerstyle/image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
+					<img src="buyerstyle/image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
 				</p>
 				<p>
-					<img src="../image/hotel-img4.jpg"width="49%"height="49%"data-preview-src="" data-preview-group="1" />
-					<img src="../image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
+					<img src="buyerstyle/image/hotel-img4.jpg"width="49%"height="49%"data-preview-src="" data-preview-group="1" />
+					<img src="buyerstyle/image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
 				</p>
 				<p>
-					<img src="../image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
+					<img src="buyerstyle/image/hotel-img4.jpg"width="49%"height="49%" data-preview-src="" data-preview-group="1" />
 				</p>
 			</div>
 		</div>
 	</body>
-	<script src="../js/mui.min.js"></script>
-	<script src="../js/mui.zoom.js"></script>
-	<script src="../js/mui.previewimage.js"></script>
+	<script src="buyerstyle/js/mui.min.js"></script>
+	<script src="buyerstyle/js/mui.zoom.js"></script>
+	<script src="buyerstyle/js/mui.previewimage.js"></script>
 	<script>
 		mui.previewImage();
 	</script>

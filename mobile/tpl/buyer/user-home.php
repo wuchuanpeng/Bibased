@@ -104,7 +104,7 @@
 				window.location.href="admin.php?controller=usershop&method=index";
 			});
 			document.getElementById("user-order-item").addEventListener("tap",function(){
-				window.location.href="orderN.php";
+				window.location.href="admin.php?controller=userorder&method=index";
 			});
 		});	
 	</script>

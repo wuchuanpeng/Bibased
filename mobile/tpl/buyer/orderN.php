@@ -7,8 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/style.css"/>
 	</head>
 	
 	<body>
@@ -56,9 +56,9 @@
 								<ul class="mui-table-view"id="table">
 									<li class="li-cell">
 										<a class="shop-order restaurant"href="javascript:;">
-					    					<img src="../image/shop-icon.jpg"class="shop-icon"style="width: 40px;height: 40px;"/>
+					    					<img src="buyerstyle/image/shop-icon.jpg"class="shop-icon"style="width: 40px;height: 40px;"/>
 				    						<h5>家常菜馆</h5>
-					    					<img class="forward"src="../image/forward-icon.png"style="width: 15px;height: 19px;"/>
+					    					<img class="forward"src="buyerstyle/image/forward-icon.png"style="width: 15px;height: 19px;"/>
 					    					<span>订单完成</span>
 					    					<div class="hr"></div>
 					    				</a>
@@ -82,9 +82,9 @@
 								<ul class="mui-table-view">
 									<li class="li-cell">
 										<a class="shop-order restaurant"href="javascript:;"id="restaurant2">
-					    					<img src="../image/shop-icon.jpg"class="shop-icon"style="width: 40px;height: 40px;"/>
+					    					<img src="buyerstyle/image/shop-icon.jpg"class="shop-icon"style="width: 40px;height: 40px;"/>
 				    						<h5>家常菜馆</h5>
-					    					<img class="forward"src="../image/forward-icon.png"style="width: 15px;height: 19px;"/>
+					    					<img class="forward"src="buyerstyle/image/forward-icon.png"style="width: 15px;height: 19px;"/>
 					    					<span>订单完成</span>
 					    					<div class="hr"></div>
 					    				</a>
@@ -105,16 +105,16 @@
 			<!--顶部选项卡结束-->
 		</div>
 	</body>
-	<script src="../js/mui.min.js"></script>
-	<script src="../js/mui.pullToRefresh.js"></script>
-		<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script src="buyerstyle/js/mui.min.js"></script>
+	<script src="buyerstyle/js/mui.pullToRefresh.js"></script>
+		<script src="buyerstyle/js/mui.pullToRefresh.material.js"></script>
 		<script>
 		//		选项卡跳转页面
 		document.getElementById("user-home-item").addEventListener("tap",function(){
-			window.location.href="user-home.php";
+			window.location.href="admin.php?controller=userhome&method=index";
 		});
 		document.getElementById("user-shop-item").addEventListener("tap",function(){
-			window.location.href="user-shop.php";
+			window.location.href="admin.php?controller=usershop&method=index";
 		});
 			
 		//刷新和加载
@@ -162,14 +162,14 @@
 			//所有为.li-cell的li里的为.restaurant的a都执行同一操作
 			mui(".li-cell").on('tap','.restaurant',function(e){
 				mui.openWindow({
-					url:'restaurant.php',
+					url:'admin.php?controller=usershop&method=clickRestaurant',
 					id:'restaurant'
 				})
 			});
 			//点击了解订单详情
 			mui(".li-cell").on('tap','.detail',function(){
 				mui.openWindow({
-					url:'order-detail.php',
+					url:'admin.php?controller=userorder&method=location_orderDetail',
 					id:'orderdetail'
 				})
 			});
@@ -185,7 +185,7 @@
 			//评价界面
 			mui('.li-cell').on('tap','.menu-access',function(){
 				mui.openWindow({
-					url:'menuaccess.php',
+					url:'admin.php?controller=userorder&method=location_evaluatePage',
 					id:'menuaccess',
 //					show:{
 //						aniShow:'slide-in-bottom'
@@ -194,7 +194,7 @@
 			});
 			document.getElementById('menu-access2').addEventListener('tap',function(){
 				mui.openWindow({
-					url:'menuaccess.php',
+					url:'admin.php?controller=userorder&method=location_evaluatePage',
 					id:'menuaccess',
 //					show:{
 //						aniShow:'slide-in-bottom'

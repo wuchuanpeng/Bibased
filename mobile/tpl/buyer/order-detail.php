@@ -4,9 +4,9 @@
 	<head> 
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/orderpage.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/reset.css">
+		<link href="buyerstyle/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/orderpage.css"/>
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/reset.css">
 	</head>
 	
  
@@ -14,7 +14,7 @@
 		<header class="mui-bar mui-bar-nav" style="background-color: #fff;">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #000;"></a>
 		    <h1 class="mui-title">家常菜馆</h1>
-		    <a href="#div-tel"><img src="../img/top-tel.png" class="head-tel"></a>
+		    <a href="#div-tel"><img src="buyerstyle/img/top-tel.png" class="head-tel"></a>
 		</header>
 		
 		<div class="mui-content" id="detail-content">
@@ -80,7 +80,7 @@
 									<li class="mui-table-view-cell">
 										<a href="" class="mui-navigate-right order-shop-link">
 											<div class="order-shop-img">
-												<img src="../img/headimg.jpeg">
+												<img src="buyerstyle/img/headimg.jpeg">
 											</div>
 											<span class="order-shop-name">家常菜馆</span>
 										</a>
@@ -227,9 +227,9 @@
 			</ul>
 		</div>
 	</body>
-	<script src="../js/mui.min.js"></script>
-	<script src="../js/mui.pullToRefresh.js"></script>
-	<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script src="buyerstyle/js/mui.min.js"></script>
+	<script src="buyerstyle/js/mui.pullToRefresh.js"></script>
+	<script src="buyerstyle/js/mui.pullToRefresh.material.js"></script>
 	<script type="text/javascript">
 		mui('.mui-scroll-wrapper').scroll({
 			scrollY:true,
@@ -253,9 +253,7 @@
 			}, 1500);
 		}
 		
-			// document.getElementById("detail-content").style.height=window.innerHeight+'px';
-			// document.getElementById("item1mobile").style.height=window.innerHeight+'px';
-			// document.getElementById("item2mobile").style.height=window.innerHeight+'px';
+
 		
 		document.getElementById("refundMoney").addEventListener('tap',function(){
 			mui.toast("退款成功");
@@ -269,7 +267,7 @@
 				});
 		});
 		document.getElementById("evalAccess").addEventListener('tap',function(){
-			window.location.href="menuaccess.php";
+			window.location.href="admin.php?controller=userorder&method=location_evaluatePage";
 		});	
 	</script>
 </html>

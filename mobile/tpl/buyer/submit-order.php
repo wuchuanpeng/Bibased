@@ -5,9 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/submit-order.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link href="buyerstyle/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/submit-order.css"/>
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/reset.css"/>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -94,13 +94,13 @@
 					<li class="sub-view">
 						<a href="#way-pay">
 							<p class="pay-txt">在线支付</p>
-							<p class="sub-choose"><img src="../image/choose.png"/></p>
+							<p class="sub-choose"><img src="buyerstyle/image/choose.png"/></p>
 						</a>
 					</li>
 					<li class="sub-view">
 						<a href="#way-pay">
 							<p class="pay-txt">货到付款</p>
-							<p class="sub-choose ishide"><img src="../image/choose.png"/></p>
+							<p class="sub-choose ishide"><img src="buyerstyle/image/choose.png"/></p>
 						</a>
 					</li>
 				</ul>
@@ -178,7 +178,7 @@
 
 		
 	</body>
-     <script src="../js/mui.min.js"></script>
+     <script src="buyerstyle/js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init();
 			//返回

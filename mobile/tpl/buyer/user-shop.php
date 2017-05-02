@@ -148,7 +148,7 @@
 			window.location.href="admin.php?controller=userhome&method=index";
 		});
 		document.getElementById("user-order-item").addEventListener("tap",function(){
-			window.location.href="orderN.php";
+			window.location.href="admin.php?controller=userorder&method=index";
 		});
 		
 		//监听shop-content下所有的aaaa的点击事件,跳转进入店铺

@@ -4,10 +4,10 @@
 	<head> 
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/orderpage.css"/>
-		<link rel="stylesheet" type="text/css" href="../css/reset.css">
-		<link rel="stylesheet" type="text/css" href="../css/image-viewer.css"/>
+		<link href="buyerstyle/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/orderpage.css"/>
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/image-viewer.css"/>
 	</head>
 	
 
@@ -36,7 +36,7 @@
 								<ul class="mui-table-view seller-detail1">
 									<li class="mui-table-view-cell detail-item">
 										<span class="detail-content">37824723472</span>
-										<a href="#seller-tel" id="detail-phone-icon"><img src="../img/top-tel.png"/></a>
+										<a href="#seller-tel" id="detail-phone-icon"><img src="buyerstyle/img/top-tel.png"/></a>
 									</li>
 									<li class="mui-table-view-cell detail-item">
 										<a href="" class="mui-navigate-right">
@@ -117,7 +117,7 @@
 									<li class="mui-table-view-cell customer-eval-item">
 										<div class="eval-item-top">
 											<div class="item-top-left">
-												<img src="../img/headimg.jpeg"/>
+												<img src="buyerstyle/img/headimg.jpeg"/>
 											</div>
 											<div class="item-top-right">
 												<div class="top-right-top clearfloat">													
@@ -139,8 +139,8 @@
 										<div class="eval-item-content">
 											<p class="evaluate-word">很好吃</p>
 											<ul class="img-group clearfloat">
-												<li><img src="../img/muwu.jpg" data-preview-src="" data-preview-group="1" /></li>
-												<li><img src="../img/muwu.jpg" data-preview-src="" data-preview-group="1"/></li>
+												<li><img src="buyerstyle/img/muwu.jpg" data-preview-src="" data-preview-group="1" /></li>
+												<li><img src="buyerstyle/img/muwu.jpg" data-preview-src="" data-preview-group="1"/></li>
 											</ul>
 											<span class="eval-object">农家小炒肉+米饭</span>
 											<span class="label-evaluation">味道好,风雨无阻,送货快</span>
@@ -152,7 +152,7 @@
 									<li class="mui-table-view-cell customer-eval-item">
 										<div class="eval-item-top">
 											<div class="item-top-left">
-												<img src="../img/headimg.jpeg"/>
+												<img src="buyerstyle/img/headimg.jpeg"/>
 											</div>
 											<div class="item-top-right">
 												<div class="top-right-top clearfloat">													
@@ -174,8 +174,8 @@
 										<div class="eval-item-content">
 											<p class="evaluate-word">很好吃味道好,风雨无阻,送货快味道好,风雨无阻,送货快味道好,风雨无阻,送货快</p>
 											<ul class="img-group clearfloat">
-												<li><img src="../img/muwu.jpg" data-preview-src="" data-preview-group="1" /></li>
-												<li><img src="../img/muwu.jpg" data-preview-src="" data-preview-group="1"/></li>
+												<li><img src="buyerstyle/img/muwu.jpg" data-preview-src="" data-preview-group="1" /></li>
+												<li><img src="buyerstyle/img/muwu.jpg" data-preview-src="" data-preview-group="1"/></li>
 											</ul>
 											<span class="eval-object">农家小炒肉+米饭</span>
 											<span class="label-evaluation">味道好,风雨无阻,送货快味道好,风雨无阻,送货快味道好,风雨无阻,送货快</span>
@@ -209,11 +209,11 @@
 			</ul>
 		</div>
 	</body>
-	<script src="../js/mui.min.js"></script>
-	<script src="../js/mui.pullToRefresh.js"></script>
-	<script src="../js/mui.pullToRefresh.material.js"></script>
-	<script src="../js/mui.previewimage.js"></script>
-	<script src="../js/mui.zoom.js"></script>
+	<script src="buyerstyle/js/mui.min.js"></script>
+	<script src="buyerstyle/js/mui.pullToRefresh.js"></script>
+	<script src="buyerstyle/js/mui.pullToRefresh.material.js"></script>
+	<script src="buyerstyle/js/mui.previewimage.js"></script>
+	<script src="buyerstyle/js/mui.zoom.js"></script>
 	<script type="text/javascript">
 //		调整css布局
 		var evalitemtopGroup=document.getElementsByClassName("eval-item-top");

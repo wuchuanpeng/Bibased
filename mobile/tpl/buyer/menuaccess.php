@@ -6,15 +6,15 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link href="buyerstyle/css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="buyerstyle/css/style.css"/>
 	</head>
   <style type="text/css">
   	
   </style>
 	<body>
 		<header class="mui-bar mui-bar-nav"style="background-color: #fff;">
-		    <a id="access-shut"href="javascript:;"><img src="../image/access-shut.png"style="margin-top: 8px;"/></a>
+		    <a id="access-shut"href="javascript:;"><img src="buyerstyle/image/access-shut.png"style="margin-top: 8px;"/></a>
 		    <h1 class="mui-title"style="font-size: 18px;color: #000;">评价</h1>
 		    <button type="button"class="mui-pull-right put-btn"style="background-color: #CCCCCC;color:#F0F0F0;margin-top: 6px;">提交</button>
 		</header>
@@ -22,10 +22,10 @@
 			<!--为配送评分-->
 		    <div class="seller-out">
 		    	<div class="seller-top"style="width: 94%;margin: 0 auto;">
-		    		<img src="../image/seller.jpg"style="width: 40px;height: 40px;"class="seller-icon"/>
+		    		<img src="buyerstyle/image/seller.jpg"style="width: 40px;height: 40px;"class="seller-icon"/>
 		    		<h5 class="seller-name">商家配送</h5>
 		    		<p>3月12号<span id="seller-time">12:30</span>左右送达</p>
-		    		<a class="seller-correct"href="#time-btn"id="correct-btn">更正<img src="../image/seller-correct.png"/></a>
+		    		<a class="seller-correct"href="#time-btn"id="correct-btn">更正<img src="buyerstyle/image/seller-correct.png"/></a>
 		    	</div>
 		    	<div class="seller-access">
 		    		<h5 id="setaccess">为配送打分</h5>
@@ -98,7 +98,7 @@
 		    <!--为商家打分-->
 		    <div class="seller-shop seller-out">
 		    	<div class="seller-top"style="width: 94%;margin: 0 auto;">
-		    		<img src="../image/shop-icon.jpg"style="width: 40px;height: 40px;"class="seller-icon"/>
+		    		<img src="buyerstyle/image/shop-icon.jpg"style="width: 40px;height: 40px;"class="seller-icon"/>
 		    		<h5 style="margin-top: 30px;color: #000;float: left;margin-left: 8px;">家常菜馆</h5>
 		    	</div>
 		    	<div class="seller-access">
@@ -173,12 +173,12 @@
 		    	<div class="tocomment">
 		    		<textarea id='comment-text'name="txt" rows="4" cols="4" placeholder="写下您对配送和商家的评价吧~"class="comment-text"></textarea>
 		    	    <!--添加图片-->
-		    	    <a href="javascript:;"class="addimg"id="addimg"><img src="../image/addimg-icon.png"/></a>
+		    	    <a href="javascript:;"class="addimg"id="addimg"><img src="buyerstyle/image/addimg-icon.png"/></a>
 		    	</div>
 		    	<div class="comment-footer">
 		    		<p class="footer-text">土豆烧鸡</p>
-		    		<p class="footer-icon"id="footer-icon1"><img src="../image/cai-gray.png"id="footer-img1"/>踩</p>
-		    		<p class="footer-icon"id="footer-icon2"><img src="../image/zan-gray.png"id="footer-img2"/>赞</p>
+		    		<p class="footer-icon"id="footer-icon1"><img src="buyerstyle/image/cai-gray.png"id="footer-img1"/>踩</p>
+		    		<p class="footer-icon"id="footer-icon2"><img src="buyerstyle/image/zan-gray.png"id="footer-img2"/>赞</p>
 		    	</div>
 		    </div>
 		</div>
@@ -217,8 +217,8 @@
 				<li class="cancel-btn"><a href="#time-btn"style="color: #fff;">取消</a></li>
 		</div>
 	</body>
-    <script src="../js/mui.min.js"></script>
-    <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="buyerstyle/js/mui.min.js"></script>
+    <script src="buyerstyle/js/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init();
 			//从评价页面返回到主页面
@@ -325,7 +325,7 @@
 			var onoff2=0;
 			var ficon1=document.getElementById('footer-icon1');
 			var ficon2=document.getElementById('footer-icon2');
-			var aimg=['../image/cai-gray.png','../image/cai-active.png','../image/zan-gray.png','../image/zan-active.png'];
+			var aimg=['buyerstyle/image/cai-gray.png','buyerstyle/image/cai-active.png','buyerstyle/image/zan-gray.png','buyerstyle/image/zan-active.png'];
 				ficon2.addEventListener('tap',function(){
 						if(onoff1==0){
 							this.className='footer-icon'+' '+'footer-icon-spe2';
@@ -366,116 +366,6 @@
 						}
 					});
 			
-			//添加图片
-			var adimg=document.getElementById('addimg');
-			  function plusReady(){  
-	             // 弹出系统选择按钮框  
-	              mui(".tocomment").on("tap",".addimg",function(){  
-	                  page.imgUp();  
-	              });
-	
-	            }  
-               
-            var page=null;  
-            page={  
-                imgUp:function(){  
-                    var m=this;  
-                    plus.nativeUI.actionSheet({cancel:"取消",buttons:[  
-                        {title:"拍照"},  
-                        {title:"从相册中选择"}  
-                    ]}, function(e){//1 是拍照  2 从相册中选择  
-                        switch(e.index){  
-                            case 1:clickCamera();break;  
-                            case 2:clickGallery();break;  
-                        }  
-                    });  
-                }  
-                //摄像头  
-            }  
-              
-              
-     //发送照片  
-      
-    function clickGallery() {  
-        plus.gallery.pick(function(path) {  
-            plus.zip.compressImage({  
-                src: path,  
-                dst: "_doc/chat/gallery/" + path,  
-                quality: 20,  
-                overwrite: true  
-            }, function(e) {  
-                var task = plus.uploader.createUpload(server + "upload/chat", {  
-                    method: "post"  
-                }, function(t, sta) {  
-                    console.log(JSON.stringify(t))  
-                    if(sta == 200) {  
-                        var msg = t.responseText;  
-                        var oImg = JSON.parse(msg);  
-                        var imgUrl = oImg.urls;  
-                        var re = new RegExp("\\\\", "g");  
-                        imgUrl = imgUrl.replace(re, "/");  
-                        uploadMsg(2, imgUrl);  
-                    }  
-                });  
-                task.addFile(e.target, {});  
-                task.start();  
-            }, function(err) {  
-                console.error("压缩失败：" + err.message);  
-            });  
-  
-        }, function(err) {});  
-    };  
-      
-      
-    // 拍照  
-      
-    function clickCamera() {  
-        var cmr = plus.camera.getCamera();  
-        var res = cmr.supportedImageResolutions[0];  
-        var fmt = cmr.supportedImageFormats[0];  
-        cmr.captureImage(function(path) {  
-            //plus.io.resolveLocalFileSystemURL(path, function(entry) {  
-            plus.io.resolveLocalFileSystemURL(path, function(entry) {  
-                var localUrl = entry.toLocalURL();  
-                plus.zip.compressImage({  
-                    src: localUrl,  
-                    dst: "_doc/chat/camera/" + localUrl,  
-                    quality: 20,  
-                    overwrite: true  
-                }, function(e) {  
-                    var task = plus.uploader.createUpload(server + "upload/chat", {  
-                        method: "post"  
-                    }, function(t, sta) {  
-                        if(sta == 200) {  
-                            var msg = t.responseText;  
-                            var oImg = JSON.parse(msg);  
-                            var imgUrl = oImg.urls;  
-                            var re = new RegExp("\\\\", "g");  
-                            imgUrl = imgUrl.replace(re, "/");  
-                            console.log(imgUrl);  
-                            uploadMsg(2, imgUrl);  
-                        }  
-                    });  
-                    task.addFile(e.target, {});  
-                    task.start();  
-                }, function(err) {  
-                    console.log("压缩失败：  " + err.message);  
-                });  
-            });  
-        }, function(err) {  
-            console.error("拍照失败：" + err.message);  
-        }, {  
-            index: 1  
-        });  
-    };  
-  
-  
-              
-              
-            if(window.plus){  
-                plusReady();  
-            }else{  
-                document.addEventListener("plusready",plusReady,false);  
-            }  
+
 		</script>
 </html>

@@ -74,7 +74,7 @@
 			var btnArray = ['干掉它', '舍不得'];
 		});
 		mui("#collect-list").on('tap','.aaaa-content',function(){
-			window.location.href="restaurant.php"
+			window.location.href="admin.php?controller=usershop&method=clickRestaurant";
 		});
 	</script>
 </html>

@@ -87,14 +87,16 @@
 				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
 				</div>
 			</div>
-			<!-- 左侧选项卡对应的内容 -->
+			<!-- 左侧选项卡对应的内容-->
 			<div id="segmentedControlContents" class="mui-col-xs-9" style="padding-bottom: 60px;border-left: 1px solid #c8c7cc;">		
 			</div>
 		</div>
+
+<!--        酒店界面-->
 		<div class="mui-row mui-fullscreen ishide row-tab"style="position: absolute;">
 		 	<div class="mui-scroll-wrapper"id="hotel-scroll">
 		 		<div class="mui-scroll">
-		 			<a class="hotel-bg"id="hotel-bg"href="hotel-imgs.php">
+		 			<a class="hotel-bg"id="hotel-bg"href="admin.php?controller=userorder&method=location_hotelImg">
 						<div class="hotel-name">株洲9581商务酒店</div>
 					</a>
 					<div class="hotel-address"id="hotel-address">株洲市天元区泰山路557号</div>
@@ -144,7 +146,7 @@
 		}
 		document.getElementById('res-detail').addEventListener('tap',function(){
 			mui.openWindow({
-				url:'restaurant-detail.php',
+				url:'admin.php?controller=userorder&method=location_restDetail',
 				id:'restaurant'
 			});
 		})
@@ -254,7 +256,7 @@
 
 		//去结算
        document.getElementById('buycar-settlement').addEventListener('tap',function(){
-           	      window.location.href='submit-order.php';
+           	      window.location.href='admin.php?controller=userorder&method=location_submitOrder';
        });
        
 		//清空购物车
