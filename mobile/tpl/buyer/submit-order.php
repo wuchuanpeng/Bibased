@@ -25,67 +25,88 @@
 					        	<p class="way-txt"id="way-txt">在线支付</p>
 					        </a>
 					    </li>
-					    <li class="mui-table-view-cell">
-					        <a class="mui-navigate-right">
-					        	<p class="way-sub">微信红包</p>
-					        	<p class="way-txt"></p>
-					        </a>
-					    </li>
-					    <li class="mui-table-view-cell">
-					        <a class="mui-navigate-right">
-					        	<p class="way-sub">商家代金券</p>
-					        	<p class="way-txt"></p>
-					        </a>
-					    </li>
+<!--					    <li class="mui-table-view-cell">-->
+<!--					        <a class="mui-navigate-right">-->
+<!--					        	<p class="way-sub">微信红包</p>-->
+<!--					        	<p class="way-txt"></p>-->
+<!--					        </a>-->
+<!--					    </li>-->
+<!--					    <li class="mui-table-view-cell">-->
+<!--					        <a class="mui-navigate-right">-->
+<!--					        	<p class="way-sub">商家代金券</p>-->
+<!--					        	<p class="way-txt"></p>-->
+<!--					        </a>-->
+<!--					    </li>-->
 					</ul>
 					<ul class="mui-table-view">
 					    <li class="mui-table-view-cell">
 					      <span class="simg"></span>
-					      <span class="stxt">家常菜馆</span> 
+					      <span class="stxt">{$shopName}</span>
 					    </li>
-					    <li class="mui-table-view-cell smenu">
-					        <p style="text-align:left;">苦瓜炒蛋</p>
-					        <p>x2</p>
-					        <p>¥20</p>
+                        {foreach from=$products item=product}
+
+                        <li class="mui-table-view-cell smenu">
+					        <p style="text-align:left;">{$product.P_Name}</p>
+					        <p>x{$product.num}</p>
+					        <p>¥{$product.sum}</p>
 					    </li>
-					    <li class="mui-table-view-cell smenu">
-					        <p style="text-align:left;">茄子炒肉</p>
-					        <p>x2</p>
-					        <p>¥20</p>
-					    </li>
-					    <li class="mui-table-view-cell sact">
-					        <p class="sact-txt">优惠活动</p>
-					        <p class="sact-con">-¥3</p>
-					    </li>
+
+                        {foreachelse}
+                        当前没有数据
+                        {/foreach}
+<!--					    <li class="mui-table-view-cell sact">-->
+<!--					        <p class="sact-txt">优惠活动</p>-->
+<!--					        <p class="sact-con">-¥3</p>-->
+<!--					    </li>-->
 					    <li class="mui-table-view-cell ssum">
-					        <p>总计¥40<span>优惠¥3</span></p>
-					        <p class="sfact">实付<span class="smon">¥37</span></p>
+					        <p>总计¥{$sum}
+<!--                                <span>优惠¥3</span>-->
+                            </p>
+					        <p class="sfact">实付<span class="smon">¥{$sum}</span></p>
 					    </li>
 					</ul>
 					<ul class="mui-table-view">
+<!--						<li class="mui-table-view-cell">-->
+<!--							<a class="mui-navigate-right"href="#dinner-count">-->
+<!--								<span class="meal-num">用餐人数</span>-->
+<!--								<p class="meal-txt"id="meal-txt">以便商家给您确定餐具</p>-->
+<!--							</a>-->
+<!--						</li>-->
 						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right"href="#dinner-count">
-								<span class="meal-num">用餐人数</span>
-								<p class="meal-txt"id="meal-txt">以便商家给您确定餐具</p>
+							<a class=""href="javascript:;"id="remark">
+								<span class="meal-num">收货地址</span>
+<!--								<p class="meal-txt"id="meal-like">口味、偏好等要求</p>-->
 							</a>
+                            <textarea>{$userInfo.B_ReceiptAddr}</textarea>
 						</li>
-						<li class="mui-table-view-cell">
-							<a class="mui-navigate-right"href="add-remark.php"id="remark">
-								<span class="meal-num">备注</span>
-								<p class="meal-txt"id="meal-like">口味、偏好等要求</p>
-							</a>
-						</li>
+                        <li class="mui-table-view-cell">
+                            <a class=""href="javascript:;"id="remark">
+                                <span class="meal-num">电话</span>
+                                <!--								<p class="meal-txt"id="meal-like">口味、偏好等要求</p>-->
+
+                            </a>
+                            <input type="text" value="{$userInfo.B_Tel}"/>
+                        </li>
+
 					</ul>
 					
 			</div>
 		</div>
 	</div>
-		
+        <div style="display: none">
+            <form action="admin.php?controller=userorder&method=orderSubmit" method="post" id="order_submit">
+                {foreach from=$data item=value key=key}
+                <input type="hidden" name = "{$key}" value="{$value}"/>
+                {/foreach}
+            </form>
+        </div>
 			<!--固定底部的提交订单-->
 			<div class="sub-pay">
-			  <p class="sub-fav">优惠¥3</p>
-			  <p class="wait-sub">待支付<span>¥30</span></p>
-			  <p class="sub-btn">提交订单</p>
+			  <p class="sub-fav">
+<!--                  优惠¥3-->
+              </p>
+			  <p class="wait-sub">待支付<span>¥{$sum}</span></p>
+			  <p class="sub-btn" id = "submit-order" >提交订单</p>
 			</div>
 			<!--支付方式选择-->
 			<div id="way-pay"class="mui-popover mui-popover-bottom mui-popover-action">
@@ -97,12 +118,12 @@
 							<p class="sub-choose"><img src="buyerstyle/image/choose.png"/></p>
 						</a>
 					</li>
-					<li class="sub-view">
-						<a href="#way-pay">
-							<p class="pay-txt">货到付款</p>
-							<p class="sub-choose ishide"><img src="buyerstyle/image/choose.png"/></p>
-						</a>
-					</li>
+<!--					<li class="sub-view">-->
+<!--						<a href="#way-pay">-->
+<!--							<p class="pay-txt">货到付款</p>-->
+<!--							<p class="sub-choose ishide"><img src="buyerstyle/image/choose.png"/></p>-->
+<!--						</a>-->
+<!--					</li>-->
 				</ul>
 				<ul class="sub-cancle">
 					<li class="sub-view-cell">
@@ -111,7 +132,7 @@
 				</ul>
 			</div>
 		    <!--用餐人数选择-->
-		    <div id="dinner-count"class="mui-popover mui-popover-bottom mui-popover-action"style="height: 250px;">
+		   <!-- <div id="dinner-count"class="mui-popover mui-popover-bottom mui-popover-action"style="height: 250px;">
 		    	<div class="mui-scroll-wrapper"style="height: 200px;border-radius: 0;">
 					<div class="mui-scroll">
 						<ul class="dinner-table">
@@ -119,7 +140,7 @@
 								<a href="#dinner-count">
 									<p class="count-txt">1人</p>
 								</a>
-							</li>  
+							</li>
 							<li class="dinner-view">
 								<a href="#dinner-count">
 									<p class="count-txt">2人</p>
@@ -174,10 +195,11 @@
 					</div>
 				</div>
 				<a href="#dinner-count"><div class="count-cancel">取消</div></a>
-			</div>
+			</div>-->
 
 		
 	</body>
+    <script src="buyerstyle/js/jquery.js"></script>
      <script src="buyerstyle/js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init();
@@ -216,5 +238,8 @@
 			});
 			
 			//改变备注的内容
+            document.getElementById("submit-order").addEventListener("tap", function () {
+                $("#order_submit").submit();
+            });
 		</script>
 </html>

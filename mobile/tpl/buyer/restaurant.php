@@ -49,7 +49,7 @@
 			<header class="bar-header">
 			    <a class="mui-icon mui-icon-arrowleft mui-pull-left left-back mui-action-back"></a>
 			    <h1 class="res-title">{$sellerInfo.S_ShopName}</h1>
-			    <span class="search-icon"></span> 
+<!--			    <span class="search-icon"></span> -->
 			</header>
 			<div class="res-bg"id="res-bg">
 		  	   <div class="res-info"id="res-info">
@@ -124,6 +124,12 @@
 		    </a>
 	     	<span class="car-begin2 ishide" id="buycar-settlement">去结算</span>
 	    </div>
+<!--      隐藏 用来提交 订单数据  -->
+        <div style="display: none">
+            <form action="admin.php?controller=userorder&method=location_submitOrder" method="post" id="order_submit">
+                <input type="hidden" name = "sid" value="{$sid}"/>
+            </form>
+        </div>
 	   
 	</body>
    	<script src="buyerstyle/js/mui.min.js"></script>
@@ -190,14 +196,14 @@
             sid:sid
         };
         doajax("admin.php?controller=usershop&method=getDiscountBySID",discountOption,'json',function (data) {
-            console.info(data);
+            //console.info(data);
             for (var i = 0; i < data.length; i++) {
                 var discount = data[i];
                 var str;
                 if (discount.D_Type == 1) {
                     str = '满' +discount.D_Type1Full +'减' +discount.D_Type1Reduce;
                 } else {
-                    str = '打折商品' +discount.D_Type2Reduce*10 +'折起';
+                    str = '打折商品' +discount.D_Type2Reduce*10 +'折';
                 }
                 if (i == 0) {
 
@@ -256,7 +262,14 @@
 
 		//去结算
        document.getElementById('buycar-settlement').addEventListener('tap',function(){
-           	      window.location.href='admin.php?controller=userorder&method=location_submitOrder';
+           //把购物车数据存到隐藏表单
+           $(".carte-txt").each(function () {
+              var pid = $(this).attr("pid");
+              var pnum = $(this).find(".carte-count").text();
+              var str = '<input type="text" name = "pid' + pid + '" value="' + pnum + '"/>';
+              $("#order_submit").append(str)
+           });
+           $("#order_submit").submit();
        });
        
 		//清空购物车
@@ -304,28 +317,35 @@
 	</script>	
 	<script type="text/javascript">
 		//左侧选项卡
-		function scrollcontent(obj1,obj2,str){
-			var controls = document.getElementById(obj1);
-			var contents = document.getElementById(obj2);
+        doajax("admin.php?controller=usershop&method=getProducts", {
+            sid:sid
+        }, "json", scrollcontent);
+		function scrollcontent(data){
+		    console.info(data);
+		    var str = "content";
+			var controls = document.getElementById("segmentedControls");
+			var contents = document.getElementById("segmentedControlContents");
 			var html = [];
 			var i = 1,
 				j = 1,
 				m = 6, //左侧选项卡数量+1
 			    n = 5; //每个选项卡列表数量+1
-			for (; i < m; i++) {
-			    html.push('<a class="mui-control-item"id="titem" data-index="' + (i - 1) + '" href="#'+str + i + '">热销</a>');
+			for (; i <= data.length; i++) {
+			    html.push('<a class="mui-control-item"id="titem" kid ="'+ data[i-1].K_ID +'" data-index="' + (i - 1) + '" href="#'+str + i + '">' + data[i-1].K_Name + '</a>');
 			}
 			controls.innerHTML = html.join('');
-			html = [];
-			for (i = 1; i < m; i++) {
-				html.push('<div id="'+str+ i + '" class="mui-control-content"><div class="ltitle">热销</div><ul class="mui-table-view">');
-				for (j = 1; j < n; j++) {
-					html.push('<li class="mui-table-view-cell test" id="agrCommodity-'+i+'-'+j+'">'+
-					 '<img id="agrCommodity-'+i+'-'+j+'-1" class="menu-img" src="buyerstyle/image/menu-img.png" width="80px" height="80px"/>'+
-					 '<p id="agrCommodity-'+i+'-'+j+'-2" class="menu-name">苹果</p>'+
-					 '<p id="agrCommodity-'+i+'-'+j+'-3" class="msale">月售739</p>'+
-					 '<p id="agrCommodity-'+i+'-'+j+'-4" class="praise">赞70</p>'+
-					 '<p class="menu-price">¥<span id="agrCommodity-'+i+'-'+j+'-5">10<span></p>'+
+
+            html = [];
+			for (i = 1; i <= data.length; i++) {
+				html.push('<div id="'+str+ i + '" class="mui-control-content"><div class="ltitle">' + data[i-1].K_Name + '</div><ul class="mui-table-view">');
+				var products = data[i-1].products;
+				for (j = 1; j <= products.length; j++) {
+					html.push('<li class="mui-table-view-cell test" pid = "'+ products[j-1].P_ID +'"  id="agrCommodity-'+i+'-'+j+'">'+
+					 '<img id="agrCommodity-'+i+'-'+j+'-1" class="menu-img" src="'+ products[j-1].L_ImgUrl +'" width="80px" height="80px"/>'+
+					 '<p id="agrCommodity-'+i+'-'+j+'-2" class="menu-name">'+ products[j-1].P_Name +'</p>'+
+					 '<p id="agrCommodity-'+i+'-'+j+'-3" class="msale">月售'+ products[j-1].count +'</p>'+
+					 '<p id="agrCommodity-'+i+'-'+j+'-4" class="praise">&nbsp;&nbsp;&nbsp;&nbsp;</p>'+
+					 '<p class="menu-price">¥<span id="agrCommodity-'+i+'-'+j+'-5">'+ products[j-1].P_Price  +'<span></p>'+
 					 // '<p class="menu-yprice">预付<span>5</span>元</p>'+
 					 '<p id="agrCommodity-'+i+'-'+j+'-6" class="menu-reduce ishide reduce">一</p>'+
 					 '<span id="agrCommodity-'+i+'-'+j+'-7" class="menu-count ishide">0</span>'+
@@ -337,6 +357,8 @@
 			contents.innerHTML = html.join('');
 			//默认选中第一个
 			controls.querySelector('.mui-control-item').classList.add('mui-active');
+            tabscroll('segmentedControls','segmentedControlContents');
+            buyCarBind();
 		}
 	    function tabscroll(obj1,obj2) {
 			var controlsElem = document.getElementById(obj1);//左侧类别外围div
@@ -423,8 +445,8 @@
 			});
 		} 
 		//调用左侧选项卡 农产品
-		scrollcontent('segmentedControls','segmentedControlContents','content');
-		tabscroll('segmentedControls','segmentedControlContents');
+		//scrollcontent('segmentedControls','segmentedControlContents','content');
+		//tabscroll('segmentedControls','segmentedControlContents');
 		
 	    //点击加入购物车 加
 	    
@@ -440,88 +462,91 @@
 	    var postPay=document.getElementById('post-pay');//邮费
 	    var postLine=100;
 	    var preBuyCarCount,preTotalMoney,preAgrCount,agrName,agrUnitPrice;
+        function buyCarBind() {
 
-	    mui('.mui-table-view-cell').on('tap','.menu-add',function(){
-	    	var menuAddId=this.getAttribute('id');
-	    	var aid=menuAddId.substring(0,menuAddId.length-2);//获得当前点击商品的id
-	    	var productBuyCount=document.getElementById(aid+'-7');//商品li里的已购买商品数
-	    	var curAgrCount;
+            mui('.mui-table-view-cell').on('tap','.menu-add',function(){
+                var menuAddId=this.getAttribute('id');
+                var aid=menuAddId.substring(0,menuAddId.length-2);//获得当前点击商品的id
+                var productBuyCount=document.getElementById(aid+'-7');//商品li里的已购买商品数
+                var curAgrCount;
+                var pid = document.getElementById(aid).getAttribute("pid");
+                preAgrCount=parseInt(productBuyCount.innerHTML);//原有商品栏里商品数
+                agrName=document.getElementById(aid+'-2').innerHTML;//商品名称
+                agrUnitPrice=parseInt(document.getElementById(aid+'-5').innerHTML);//单价
+                preBuyCarCount=parseInt(carCount.innerHTML);//购物车数量
+                preTotalMoney=parseInt(totalDollar.innerHTML);//原有总消费金额
 
-	    	preAgrCount=parseInt(productBuyCount.innerHTML);//原有商品栏里商品数
-	    	agrName=document.getElementById(aid+'-2').innerHTML;//商品名称
-	    	agrUnitPrice=parseInt(document.getElementById(aid+'-5').innerHTML);//单价
-	    	preBuyCarCount=parseInt(carCount.innerHTML);//购物车数量
-	    	preTotalMoney=parseInt(totalDollar.innerHTML);//原有总消费金额
-	    	
-	    	//元素显示
-	    	if(preAgrCount==0){
-	    		document.getElementById(aid+'-6').classList.remove('ishide');
-	    		productBuyCount.classList.remove('ishide');
-	    	}
-	    	if(preBuyCarCount==0){
-	    		postMoney.classList.remove('ishide');
-	    		carDollar.classList.remove('ishide');
-	    		carCount.classList.remove('ishide');
-	    		carSettlement.classList.remove('ishide');
-	    		lightIcon.classList.remove('ishide');
-	    	}
-	    	if((preTotalMoney<postLine)&&(preTotalMoney+agrUnitPrice>=postLine)){
-	    		postFree.classList.remove('ishide');
-	    		postPay.classList.add('ishide');
-	    	}
-	    	//订单数增加
-	    	curAgrCount=preAgrCount+1;
-	    	productBuyCount.innerHTML=curAgrCount;
-	    	carCount.innerHTML=preBuyCarCount+1;
-	    	//订单实际价格增加
-	    	totalDollar.innerHTML=preTotalMoney+agrUnitPrice;
-            
-	    	//点击加的时候同步购物车的订单数,当某件商品数量为1时添加一个新的购物车li
-	         if(curAgrCount==1){
-	         	var li=document.createElement('li');
-	         	li.className='carte-txt';
-	    	 	li.innerHTML='<p class="carte-name">'+agrName+'</p>'+
-	    	 	             '<p class="carte-price">¥<span>'+agrUnitPrice+'</span>'+
-	    	 	             '<p class="carte-reduce reduce">一</p>'+
-	    	 	             '<p class="carte-count">'+curAgrCount+'</p>'+
-	    	 	             '<p class="carte-add add">+</p>'
-	    	 	li.setAttribute('id',aid+'-f');
-	    	 	carte.appendChild(li);
-	         }else{
-	          	document.getElementById(aid+"-f").children[3].innerHTML=curAgrCount;
-	         } 
-	    });
-	    //减 
-	    mui('.mui-table-view-cell').on('tap','.menu-reduce',function(){
-	    	var menuAddId=this.getAttribute('id');
-	    	var aid=menuAddId.substring(0,menuAddId.length-2);//获得当前点击商品的id
-	    	var productBuyCount=document.getElementById(aid+'-7');//商品li里的已购买商品数
-	    	var curAgrCount;
-	    	
-	    	preAgrCount=parseInt(productBuyCount.innerHTML);//原有商品栏里商品数
-	    	agrUnitPrice=parseInt(document.getElementById(aid+'-5').innerHTML);//单价
-	    	preBuyCarCount=parseInt(carCount.innerHTML);//购物车数量
-	    	preTotalMoney=parseInt(totalDollar.innerHTML);//原有总消费金额
+                //元素显示
+                if(preAgrCount==0){
+                    document.getElementById(aid+'-6').classList.remove('ishide');
+                    productBuyCount.classList.remove('ishide');
+                }
+                if(preBuyCarCount==0){
+                    postMoney.classList.remove('ishide');
+                    carDollar.classList.remove('ishide');
+                    carCount.classList.remove('ishide');
+                    carSettlement.classList.remove('ishide');
+                    lightIcon.classList.remove('ishide');
+                }
+                if((preTotalMoney<postLine)&&(preTotalMoney+agrUnitPrice>=postLine)){
+                    postFree.classList.remove('ishide');
+                    postPay.classList.add('ishide');
+                }
+                //订单数增加
+                curAgrCount=preAgrCount+1;
+                productBuyCount.innerHTML=curAgrCount;
+                carCount.innerHTML=preBuyCarCount+1;
+                //订单实际价格增加
+                totalDollar.innerHTML=preTotalMoney+agrUnitPrice;
 
-			if(preAgrCount==1){
-				productBuyCount.innerHTML=0;
-				curAgrCount=0;
-				productBuyCount.classList.add('ishide'); 
-				this.classList.add('ishide');   		
-			}else{
-				curAgrCount=preAgrCount-1;
-				productBuyCount.innerHTML=curAgrCount;
-			}
-	    	buyCarJudge();
-	    	if(carte.children.length!=0){
-	    		if(curAgrCount==0){
-	    			var delLi=document.getElementById(aid+'-f');
-	    			carte.removeChild(delLi);
-	    		}else if(curAgrCount>0){
-		    		document.getElementById(aid+'-f').children[3].innerHTML=curAgrCount; 
-	    	    }
-	    	}
-	    });
+                //点击加的时候同步购物车的订单数,当某件商品数量为1时添加一个新的购物车li
+                 if(curAgrCount==1){
+                    var li=document.createElement('li');
+                    li.className='carte-txt';
+                    li.setAttribute("pid", pid);
+                    li.innerHTML='<p class="carte-name">'+agrName+'</p>'+
+                                 '<p class="carte-price">¥<span>'+agrUnitPrice+'</span>'+
+                                 '<p class="carte-reduce reduce">一</p>'+
+                                 '<p class="carte-count">'+curAgrCount+'</p>'+
+                                 '<p class="carte-add add">+</p>'
+                    li.setAttribute('id',aid+'-f');
+                    carte.appendChild(li);
+                 }else{
+                    document.getElementById(aid+"-f").children[3].innerHTML=curAgrCount;
+                 }
+            });
+            //减
+            mui('.mui-table-view-cell').on('tap','.menu-reduce',function(){
+                var menuAddId=this.getAttribute('id');
+                var aid=menuAddId.substring(0,menuAddId.length-2);//获得当前点击商品的id
+                var productBuyCount=document.getElementById(aid+'-7');//商品li里的已购买商品数
+                var curAgrCount;
+
+                preAgrCount=parseInt(productBuyCount.innerHTML);//原有商品栏里商品数
+                agrUnitPrice=parseInt(document.getElementById(aid+'-5').innerHTML);//单价
+                preBuyCarCount=parseInt(carCount.innerHTML);//购物车数量
+                preTotalMoney=parseInt(totalDollar.innerHTML);//原有总消费金额
+
+                if(preAgrCount==1){
+                    productBuyCount.innerHTML=0;
+                    curAgrCount=0;
+                    productBuyCount.classList.add('ishide');
+                    this.classList.add('ishide');
+                }else{
+                    curAgrCount=preAgrCount-1;
+                    productBuyCount.innerHTML=curAgrCount;
+                }
+                buyCarJudge();
+                if(carte.children.length!=0){
+                    if(curAgrCount==0){
+                        var delLi=document.getElementById(aid+'-f');
+                        carte.removeChild(delLi);
+                    }else if(curAgrCount>0){
+                        document.getElementById(aid+'-f').children[3].innerHTML=curAgrCount;
+                    }
+                }
+            });
+        }
 		function buyCarJudge(){
 			if(preBuyCarCount==1){
 	    		carCount.innerHTML=0;

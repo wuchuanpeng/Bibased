@@ -104,5 +104,130 @@
             }
             return $productkis;
         }
+
+        /**
+         * 订单跳转页面的数据
+         * @param $sid
+         * @param $data
+         * @return array
+         */
+        function submitOrder($sid,$data) {
+            $sum = 0;
+            $products = array();
+            //1.查出商店名称
+            $sql = "SELECT S_ShopName FROM r_seller WHERE S_Status = 1 AND S_ID = $sid";
+            $result = DB::findOne($sql);
+            $shopName = $result['S_ShopName'];
+            foreach ($data as $key => $value) {
+                if ($key == "sid") {
+                    continue;
+                }
+                $pid = substr($key,3);
+                //2查出商品价格
+                $sql = "SELECT P_Name,P_Price FROM r_product WHERE P_ID = $pid AND P_Status = 1";
+                $result2 = DB::findOne($sql);
+                $result2["num"] = $value;
+                $result2["sum"] = $value * $result2["P_Price"];
+                $sum += $result2["sum"];
+                $products[] = $result2;
+            }
+            //3.查出用户地址
+            $UID = $_SESSION["buyer_id"];
+            $sql = "SELECT B_ReceiptAddr,B_Tel FROM r_buyer WHERE B_UID = $UID AND B_Status = 1";
+            $result = DB::findOne($sql);
+            return array("shopName" => $shopName, "products" => $products, "sum" => $sum, "userInfo" => $result, "data" => $data);
+        }
+
+        /**
+         * 支付前的数据
+         * @param $sid
+         * @param $data
+         */
+        function orderSubmit($sid,$data) {
+            $sql = "SELECT S_ShopName FROM r_seller WHERE S_Status = 1 AND S_ID = $sid";
+            $result = DB::findOne($sql);
+            $shopName = $result['S_ShopName'];
+            $products = array();
+            $sum = 0;
+            foreach ($data as $key => $value) {
+                if ($key == "sid") {
+                    continue;
+                }
+                $pid = substr($key,3);
+                //2查出商品价格
+                $sql = "SELECT P_ID, P_Name,P_Price FROM r_product WHERE P_ID = $pid AND P_Status = 1";
+                $result2 = DB::findOne($sql);
+                $result2["num"] = $value;
+                $result2["sum"] = $value * $result2["P_Price"];
+                $sum += $result2["sum"];
+                $products[] = $result2;
+            }
+            //保存订单表
+            //查出fid
+            DB::query("BEGIN");
+            $fid = $this->getFidBySid($sid);
+            $bid = $_SESSION["buyer_id"];
+            $no = time().mt_rand(100,999);
+            $date = time();
+            $table = "r_order";
+            $arr = array();
+            $arr["O_FID"] = $fid;
+            $arr["O_BID"] = $bid;
+            $arr["O_No"] = $no;
+            $arr["O_OldPrice"] = $sum;
+            $arr["O_RealPrice"] = $sum;
+            $arr["O_PayMethod"] = '在线支付';
+            $arr["O_PayTime"] = $date;
+            $arr["O_Date"] = $date;
+            $arr["O_Update"] = $date;
+            $orderId = DB::insert($table, $arr);
+            if($orderId <= 0) {
+                DB::query("ROLLBACK");
+            }
+             //保存 订单详情
+            foreach ($products as $product) {
+                $table = "r_agrorder";
+                $arra = array();
+                $arra["A_OID"] = $orderId;
+                $arra["A_PID"] = $product["P_ID"];
+                $arra["A_Name"] = $product["P_Name"];
+                $arra["A_OldPrice"] = $product["sum"];
+                $arra["A_RealPrice"] = $product["sum"];
+                $arra["A_Count"] = $product["num"];
+                $arra["A_Date"] = time();
+                $arra["A_Update"] = time();
+                $backId = DB::insert($table,$arra);
+                if ($backId <= 0 ) {
+                    DB::query("ROLLBACK");
+                }
+            }
+            DB::query("COMMIT");
+            return array("sum" => $sum, "shopName" => $shopName, "orderId" => $orderId);
+        }
+
+        /**
+         * 根据 商户id 获取 商店ID
+         * @param $sid
+         * @return mixed
+         */
+        function getFidBySid($sid) {
+            $sql = "SELECT F_ID FROM r_farmshop WHERE F_SID = $sid";
+            $result = DB::findOne($sql);
+            return $result['F_ID'];
+        }
+
+        /**
+         * 支付
+         * @param $oid 订单id
+         */
+        function orderPay($oid) {
+            $table = "r_order";
+            $arr = array();
+            $arr["O_PayState"] = 1;
+            $arr["O_PayTime"] = time();
+            $where = "O_Status = 1 AND O_ID = $oid";
+            $result = DB::update($table, $arr, $where);
+            return $result;
+        }
     }
  ?>
