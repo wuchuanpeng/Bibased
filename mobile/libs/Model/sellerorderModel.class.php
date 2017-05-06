@@ -62,6 +62,13 @@
                           'agrOrderImg' => $agrOrderImg);
             return $back;
         }
+        function modOrderState($oid){
+            $updateArr=array('O_HandleState' => 1,
+                             'O_Update' => time());
+            $where="O_Status>0 and O_ID=".$oid;
+            $res=DB::update("R_Order",$updateArr,$where);
+            return $res;
+        }
 		
 	}
  ?>

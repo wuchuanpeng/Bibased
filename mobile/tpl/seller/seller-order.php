@@ -12,13 +12,14 @@
 	</head>
 	<body> 
 		<header class="mui-bar mui-bar-nav">
-	        <h1 class="mui-title">我的订单</h1>
+	        <h1 class="mui-title">新订单</h1>
 	 	 </header>
 	 	 <!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="height: 90%;">
 			<div class="mui-scroll">
 				<!--数据列表-->
                 <div class="aaaaaa">
+                    {if $orderMsg neq ""}
                     {foreach from=$orderMsg key=k item=value}
                     <ul class="order-details">
                         <li class="order-type">
@@ -69,8 +70,10 @@
                                     <span class="commodity-unitPrice">¥{$rvalue.A_RealPrice}</span>
                                 </div>
                                 <div class="note-count">
-                                    <p class="order-note">备注:{$value.O_Desc}</p>
                                     <span class="order-count">×{$rvalue.A_Count}</span>
+                                </div>
+                                <div class="note-count">
+                                    <p class="order-note">备注:{$value.O_Desc}</p>
                                 </div>
                             </div>
                         </li>
@@ -79,10 +82,13 @@
                             <p>共2件商品&nbsp;合计: ¥ <span class="total-price">{$value.O_RealPrice}</span>元(含运费0.00元)</p>
                         </li>
                         <li class="order-deal clearfloat">
-                            <button type="button" class="mui-btn mui-btn-primary btn-confirm" style="border-radius: 3px;">接受订单</button>
+                            <button type="button" id="{$value.O_ID}" class="mui-btn mui-btn-primary btn-confirm" style="border-radius: 3px;">接受订单</button>
                         </li>
                     </ul>
                     {/foreach}
+                    {else}
+                    当前没有新订单
+                    {/if}
                 </div>
 			</div>
 		</div>
@@ -106,7 +112,9 @@
         </div>
 	</body>
 	<script src="buyerstyle/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
+	<script src="buyerstyle/js/jquery.js"></script>
+    <<script src="buyerstyle/js/func.js"></script>
+    <script type="text/javascript">
 		//		选项卡跳转页面
 		document.getElementById("seller-commodity-item").addEventListener("tap",function(){
 			window.location.href="admin.php?controller=sellercommodity&method=index";
@@ -114,27 +122,25 @@
 		document.getElementById("seller-home-item").addEventListener("tap",function(){
 			window.location.href="admin.php?controller=sellerhome&method=index";
 		});
-	</script>	
-	<script type="text/javascript">
-		mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						
-						callback: pulldownRefresh
-					}
-				}
-			});
-			/**
-			 * 下拉刷新具体业务实现
-			 */
-			function pulldownRefresh() {
-				setTimeout(function() {
-                     //下拉的时候要执行的操作
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-				}, 1500);
-			}
 
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                down: {
+                    callback: pulldownRefresh
+                }
+            }
+        });
+        /**
+         * 下拉刷新具体业务实现
+         */
+        function pulldownRefresh() {
+            setTimeout(function() {
+                //下拉的时候要执行的操作
+                document.location.reload();
+                mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+            }, 1500);
+        }
 	</script>
 	<script type="text/javascript">
 		//查看订单详情
@@ -143,9 +149,19 @@
 //		});
 		//接单
 		mui('.order-deal').on('tap','.btn-confirm',function(){
-			this.classList.remove('mui-btn-primary');
-			this.classList.add('mui-btn-success');
-			this.innerText='已接单';
+
+			var orderId=this.id;
+            doajax("admin.php?controller=sellerorder&method=mod_OrderState",{
+                orderid:orderId
+            },"json",function (msg) {
+                if(msg){
+                    mui.toast('接单成功');
+                    document.location.reload();
+                }
+            });
+            this.classList.remove('mui-btn-primary');
+            this.classList.add('mui-btn-success');
+            this.innerText='已接单';
 		});
 	</script>
 </html>
