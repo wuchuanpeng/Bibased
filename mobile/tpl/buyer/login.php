@@ -78,13 +78,20 @@
 
 			//为登录按钮设置监听事件
 			document.getElementById("login").addEventListener("tap",function(){
-				var checkSeller=document.getElementById('is_seller');
-				if(checkSeller.checked){
-					sellerlogin();
-				}else{
-					userlogin();
-				}
-				
+			    if(document.getElementById('account').value==""){
+			        mui.alert('用户名为空');
+			        return false;
+                }else if(document.getElementById('login_password').value==""){
+			        mui.alert('密码为空');
+			        return false;
+                }else{
+                    var checkSeller=document.getElementById('is_seller');
+                    if(checkSeller.checked){
+                        sellerlogin();
+                    }else{
+                        userlogin();
+                    }
+                }
 			});
 		});
 	</script>

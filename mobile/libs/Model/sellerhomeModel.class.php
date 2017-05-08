@@ -45,7 +45,29 @@
             $where = "U_Status>0 and U_ID=" . $uid;
             $back = DB::update($table, $newArr, $where);
             $_SESSION['reload'] = 1;
-//            $back=true;
+            return $back;
+        }
+
+        /**
+         * @param $newname 新的店铺名称
+         * @param $uid
+         * @return mixed true或者false
+         */
+        function saveNewShopName($newname,$uid){
+            $table = "R_Seller";
+            $newArr = array('S_ShopName' => $newname,
+                            'S_Update' => time());
+            $where = "S_Status>0 and S_UID=" . $uid;
+            $back = DB::update($table, $newArr, $where);
+            return $back;
+        }
+
+        function saveNewImage($newimg,$uid){
+            $table = "R_Seller";
+            $newArr = array('S_ImgUrl' => $newimg,
+                            'S_Update' => time());
+            $where = "S_Status>0 and S_UID=" .$uid;
+            $back = DB::update($table, $newArr, $where);
             return $back;
         }
 	}

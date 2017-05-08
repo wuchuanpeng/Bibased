@@ -28,6 +28,8 @@
          *加载我的账户详情页面
          */
 		function location_myAccount(){
+            $back=$this->sellerObj->sellerMsg($this->sellerId);
+            VIEW::assign(array('account' => $back['S_Account']));
 		    VIEW::display("seller/home-myAccount.php");
         }
         /**
@@ -102,6 +104,43 @@
             $_SESSION['seller_id']="";
             $_SESSION['loginseller']="";
             header("Location:admin.php");
+        }
+
+        /**
+         * 加载其他设置页面
+         */
+        function  location_set(){
+            $res = $this -> sellerObj -> sellerMsg($this -> sellerId);
+            $shopnameOld = $res['S_ShopName'];
+            VIEW::assign(array('shopnameOld' => $shopnameOld));
+            VIEW::display("seller/store-set.php");
+        }
+
+        /**
+         * 修改商店名称
+         */
+        function save_NewShopName(){
+            $newShopName = $_POST['shopname-new'];
+            $result = $this->sellerObj -> saveNewShopName($newShopName,$this->sellerId);
+            if($result){
+                header("Location:admin.php?controller=sellerhome&method=index");
+            }
+        }
+
+        /**
+         * 修改商家用户头像
+         */
+        function save_NewImage(){
+            $newImgUrl = $_FILES['upload-seller'];
+            $indexObj = M("index");
+            $newImgUrl = $indexObj -> upload_imag($newImgUrl);
+            $back = $this -> sellerObj -> saveNewImage($newImgUrl,$this -> sellerId);
+            if($back){
+                header("Location:admin.php?controller=sellerhome&method=location_msgMod");
+            }
+        }
+        function location_ShopEval(){
+            VIEW::display('seller/home-shopEvaluate.php');
         }
 	}
  ?>

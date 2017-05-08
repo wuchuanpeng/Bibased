@@ -54,10 +54,10 @@
                         <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_myAccount">我的账户</a>
                     </li>
                     <li class="mui-table-view-cell mui-collapse-content">
-                        <a class="mui-navigate-right" href="">认证信息</a>
+                        <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_ShopEval">店铺评价</a>
                     </li>
                     <li class="mui-table-view-cell mui-collapse-content">
-                        <a class="mui-navigate-right" href="store-set.php">其他设置</a>
+                        <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_set">其他设置</a>
                     </li>
                 </ul>
             </div>	  	

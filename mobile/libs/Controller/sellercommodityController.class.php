@@ -106,7 +106,8 @@
 			$commodityremain=$_POST['commodity-remain'];
 			$commodityprice=$_POST['commodity-price'];
 			$commodityimg=$_FILES['upload-photo'];
-			$commodityimg=self::upload_imag($commodityimg);
+            $indexObj = M("index");
+			$commodityimg = $indexObj->upload_imag($commodityimg);
 			$sellerobj=M("sellercommodity");
 			if($agrHotel=="hotel"){
 				$hotelroom=$_POST['room-no'];
@@ -138,43 +139,7 @@
 			}
 		}
 
-		/*
-	     * 功     能：单文件上传upload_imag
-	     * 返回值类型：数组
-	     * 参     数：$pic_msg：获取上传文件信息，必填
-	             $ext_arr：指定文件上传类型，为数组，可选
-	              $size：限制上传文件大小默认2M，可选
-	              $dir：文件上传的目录名称，可选
-	              $name: 文件名，留空则随机取名不带后缀名  可选
-	     */
-	    function upload_imag($pic_msg,$dir='buyerstyle/uploadimgs',$name='',$ext_arr=array('jpg','png','gif','jpeg'),$size=20971520){
-	        if($pic_msg['size']>0){
-	            if(!is_dir($dir)){
-	                mkdir($dir);
-	            }
-	            $arrs=explode('.',$pic_msg['name']);
-	            $ext=$arrs[count($arrs)-1];
-	            if(!in_array($ext,$ext_arr)){
-	                echo '文件格式错误！';
-	                exit;
-	            }
-	            if($pic_msg['size']>$size){
-	                echo '文件大小已超出限制范围！';
-	                exit;
-	            }
-	            if(empty($name)){
-	                $newname=date('YmdHis',time()).rand(1000,9999).'.'.$ext;
-	            }else{
-	                $newname=$name.'.'.$ext;
-	            }
-	            $upload_img=copy($pic_msg['tmp_name'],$dir.'/'.$newname);
-	            if($upload_img==false){
-	                echo '文件上传失败！';
-	                exit;
-	            }
-	            return $dir.'/'.$newname;//上传成功，返回文件名
-	        }
-	    }
+
 
 	    function location_reviseProduct(){
 	    	$commodityId=$_GET['id'];

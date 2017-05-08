@@ -315,6 +315,7 @@
 		//下拉刷新具体业务实现
 		function pulldownRefresh() {
 			setTimeout(function() {
+                document.location.reload();
 				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 				headDiv1.style.display="block";
 			}, 1500);

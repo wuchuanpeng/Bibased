@@ -337,6 +337,21 @@ html,body,#user-home,#user-shop,#user-order{
 }
 
 /*home-msgmod.html页面css*/
+.msgmod-list{
+	width: 100%;
+}
+.msgmod-list li{
+	width: 100%;
+	height: 43px;
+}
+.msgmod-list li:first-child input[type='file']{
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
 .msgmod-list .list-image,.msgmod-list .list-name,.msgmod-list .list-password,.msgmod-list .list-tel{
 	float: left;
 	font-size: 15px;

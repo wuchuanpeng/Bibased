@@ -11,15 +11,18 @@
 
 	<body>
         <header class="mui-bar mui-bar-nav" style="background-color: rgba(255,255,255,0.9);text-align: center;">
-            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="backpage" style="color: #000000"></a>
+            <a href="admin.php?controller=sellerhome&method=index" class="mui-icon mui-icon-left-nav mui-pull-left" id="backpage" style="color: #000000"></a>
             <h1 class="mui-title">我的账户</h1>
         </header>
 		<div class="msgmod-content" style="padding-top: 44px;">
 			<ul class="mui-table-view msgmod-list">
                 <li class="mui-table-view-cell mui-collapse-content">
-                    <a class="mui-navigate-right" href="" style="padding: 3px 15px; line-height: 37px;">
-                    	<span class="list-image">头像</span>
-                    	<span class="user-image"><img src="{$sellerImg}"/></span>
+                    <a class="mui-navigate-right" href="#" style="padding: 3px 15px; line-height: 37px;">
+                        <form method="post" name="newHeadPic" action="admin.php?controller=sellerhome&method=save_NewImage" enctype="multipart/form-data">
+                            <span class="list-image">头像</span>
+                            <input type="file" value="" id="upload-seller" name="upload-seller"/>
+                            <span class="user-image"><img src="{$sellerImg}"/></span>
+                        </form>
                     </a>
                 </li>
                 <li class="mui-table-view-cell mui-collapse-content">
@@ -48,7 +51,10 @@
 		<script type="text/javascript">
 			mui.init()
 			function loginOut(){
-				mui.toast("登出");
+				window.location.href="admin.php?controller=sellerhome&method=seller_loginOut";
 			}
+			document.getElementById('upload-seller').addEventListener('change',function () {
+                document.newHeadPic.submit();
+            });
 		</script>
 </html>

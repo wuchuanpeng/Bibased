@@ -15,12 +15,12 @@
         <div style="padding-top: 44px;">
             <div class="myAccount-profit">
                 <span class="profit-left">我的营业额</span>
-                <span class="profit-right"><span id="right-money">0.00</span>元</span>
+                <span class="profit-right"><span id="right-money">{$account}</span>元</span>
             </div>
             <!--余额为零,那么提现按钮不可用-->
             <div class="func-btn">
-                <a class="deposit-record" href="">记录</a>
-                <button id="btn-deposit" type="button">提现</button>
+                <a class="deposit-record" href="">收益明细</a>
+<!--                <button id="btn-deposit" type="button">提现</button>-->
             </div>
         </div>
 
