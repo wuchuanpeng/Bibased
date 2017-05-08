@@ -197,24 +197,27 @@
         };
         doajax("admin.php?controller=usershop&method=getDiscountBySID",discountOption,'json',function (data) {
             //console.info(data);
-            for (var i = 0; i < data.length; i++) {
-                var discount = data[i];
-                var str;
-                if (discount.D_Type == 1) {
-                    str = '满' +discount.D_Type1Full +'减' +discount.D_Type1Reduce;
-                } else {
-                    str = '打折商品' +discount.D_Type2Reduce*10 +'折';
-                }
-                if (i == 0) {
+            if(data.length!=0){
+                for (var i = 0; i < data.length; i++) {
+                    var discount = data[i];
+                    var str;
+                    if (discount.D_Type == 1) {
+                        str = '满' +discount.D_Type1Full +'减' +discount.D_Type1Reduce;
+                    } else {
+                        str = '打折商品' +discount.D_Type2Reduce*10 +'折';
+                    }
+                    if (i == 0) {
 
-                    $("#discountInfo").append('<div class="act-item zindex">' + str + '</div>');
-                }else {
-                    $("#discountInfo").append('<div class="act-item ishide">' + str + '</div>');
+                        $("#discountInfo").append('<div class="act-item zindex">' + str + '</div>');
+                    }else {
+                        $("#discountInfo").append('<div class="act-item ishide">' + str + '</div>');
+                    }
                 }
+                $("#discountInfo").append('<span class="act-num">' +data.length + '个活动</span>');
+                discountloaded = true;
+            }else{
+                document.getElementById("discountInfo").innerHTML="当前没有任何活动";
             }
-            $("#discountInfo").append('<span class="act-num">' +data.length + '个活动</span>');
-            discountloaded = true;
-
         });
 
 		//mui.toast(activi.length);

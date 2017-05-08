@@ -202,7 +202,8 @@
                 }
             }
             DB::query("COMMIT");
-            return array("sum" => $sum, "shopName" => $shopName, "orderId" => $orderId);
+            return array("sum" => $sum, "shopName" => $shopName, 
+            	"orderId" => $orderId);
         }
 
         /**
