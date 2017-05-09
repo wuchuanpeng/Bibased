@@ -80,5 +80,23 @@ class userorderController{
         $result = $this ->userObj -> orderPay($oid);
         echo 1;
     }
+
+    /**
+     *订单页面去支付
+     */
+    function orderGoPay() {
+        $oid = $_GET["oid"];
+        $result = $this -> userOrderObj -> orderGoPay($oid);
+        VIEW::assign($result);
+        VIEW::display("buyer/order-pay.php");
+    }
+    /**
+     * 确认收货
+     */
+    function sureOrder() {
+        $oid = $_POST["oid"];
+        $result = $this ->userOrderObj ->sureOrder($oid);
+        echo $result;
+    }
 }
 ?>

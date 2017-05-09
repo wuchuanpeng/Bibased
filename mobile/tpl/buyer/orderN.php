@@ -50,7 +50,7 @@
 							</div>
 				   </div>
 				<!-- <div style="position: absolute;top: 40px;bottom: 0;width: 100%;">-->
-					<div id="item1mobile" class="mui-control-content mui-active" style="height: 90%">
+					<div id="item1mobile" class="mui-control-content mui-active" style="height:80%">
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
 								<ul class="mui-table-view"id="table">
@@ -81,7 +81,7 @@
                                             </span>
 					    					<div class="hr"></div>
 					    				</a>
-					    				<a href="javascript:;"id="order-detail"class="order-detail detail">
+					    				<a href="javascript:;"id="order-detail"class="order-detail detail"  oid = "{$order.O_ID}">
 <!--					    					<p class="menu-bar">土豆烧鸡</p>-->
 <!--					    					<span class="menu-count">x1</span>-->
                                             <p class="menu-bar">下单时间: {"Y-m-d H:i:s"|date:$order.O_Date}</p>
@@ -89,18 +89,18 @@
 					    				</a>
 									    <div class="menu-btn">
                                             {if $order.O_PayState eq 0}
-                                            <button type="button"class="mui-btn mui-btn-primary menu-access"id="menu-to-pay">去支付</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-to-pay" oid = "{$order.O_ID}" id="menu-to-pay">去支付</button>
                                             {else}
                                                 {if $order.O_HandleState eq 0}
-                                            <button type="button"class="mui-btn mui-btn-primary menu-access"id="menu-order-detail">订单详情</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-order-detail" oid = "{$order.O_ID}" id="menu-order-detail">订单详情</button>
                                                 {else}
                                                     {if $order.O_HandleState eq 1}
-                                            <button type="button"class="mui-btn mui-btn-primary menu-sure"id="menu-sure">确认收货</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-sure" oid = "{$order.O_ID}" id="menu-sure">确认收货</button>
                                                     {else}
                                                         {if $order.isEvaluate eq 0}
-                                            <button type="button"class="mui-btn mui-btn-primary menu-sure"id="menu-access">去评价</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-access" oid = "{$order.O_ID}" id="menu-access">去评价</button>
                                                         {else}
-                                            <button type="button"class="mui-btn mui-btn-primary menu-access"id="menu-order-detail">订单详情</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-order-detail" oid = "{$order.O_ID}"  id="menu-order-detail">订单详情</button>
                                                         {/if}
                                                     {/if}
                                                 {/if}
@@ -132,7 +132,7 @@
                                     {/if}
                                     {/if}
                                     {/if}
-                                    <li class="li-cell" oid = "{$order.O_ID}" style="border-bottom: solid 10px #EFEFF4">
+                                    <li class="li-cell"  style="border-bottom: solid 10px #EFEFF4">
                                         <a class="shop-order restaurant"href="javascript:;" sid = "{$order.S_ID}")>
                                             <img src="{$order.S_ShopImgUrl}"class="shop-icon"style="width: 40px;height: 40px;"/>
                                             <h5>{$order.S_ShopName}</h5>
@@ -142,14 +142,14 @@
                                             </span>
                                             <div class="hr"></div>
                                         </a>
-                                        <a href="javascript:;"id="order-detail"class="order-detail detail">
+                                        <a href="javascript:;"id="order-detail"class="order-detail detail" oid = "{$order.O_ID}">
                                             <!--					    					<p class="menu-bar">土豆烧鸡</p>-->
                                             <!--					    					<span class="menu-count">x1</span>-->
                                             <p class="menu-bar">下单时间: {"Y-m-d H:i:s"|date:$order.O_Date}</p>
                                             <p class="menu-sum">实付<span class="menu-price">¥{$order.O_RealPrice}</span></p>
                                         </a>
                                         <div class="menu-btn">
-                                            <button type="button"class="mui-btn mui-btn-primary menu-sure"id="menu-access">去评价</button>
+                                            <button type="button"class="mui-btn mui-btn-primary menu-access" oid = "{$order.O_ID}" id="menu-access">去评价</button>
                                         </div>
                                     </li>
                                     {/foreach}
@@ -161,9 +161,11 @@
 			<!--顶部选项卡结束-->
 		</div>
 	</body>
+    <script src="buyerstyle/js/jquery.js"></script>
 	<script src="buyerstyle/js/mui.min.js"></script>
 	<script src="buyerstyle/js/mui.pullToRefresh.js"></script>
 		<script src="buyerstyle/js/mui.pullToRefresh.material.js"></script>
+    <script src="buyerstyle/js/func.js"></script>
 		<script>
 		//		选项卡跳转页面
 		document.getElementById("user-home-item").addEventListener("tap",function(){
@@ -183,7 +185,7 @@
 					indicators: true, //是否显示滚动条
 					deceleration:deceleration
 				});
-				$.ready(function() {
+				/*$.ready(function() {
 					//循环初始化所有下拉刷新，上拉加载。
 					$.each(document.querySelectorAll('.mui-control-content .mui-scroll'), function(index, pullRefreshEl) {
 						$(pullRefreshEl).pullToRefresh({
@@ -211,51 +213,78 @@
 							}
 						});
 					});
-				});
+				});*/
 			})(mui);
 			//刷新和加载结束
 			//点击进入该店铺
 			//所有为.li-cell的li里的为.restaurant的a都执行同一操作
 			mui(".li-cell").on('tap','.restaurant',function(e){
+			    var sid = this.getAttribute("sid");
 				mui.openWindow({
-					url:'admin.php?controller=usershop&method=clickRestaurant',
+					url:'admin.php?controller=usershop&method=clickRestaurant&sid='+sid,
 					id:'restaurant'
 				})
 			});
 			//点击了解订单详情
 			mui(".li-cell").on('tap','.detail',function(){
+                var oid = this.getAttribute("oid");
 				mui.openWindow({
-					url:'admin.php?controller=userorder&method=location_orderDetail',
+					url:'admin.php?controller=userorder&method=location_orderDetail&oid='+oid,
 					id:'orderdetail'
 				})
 			});
+            mui(".li-cell").on('tap','.menu-order-detail',function(){
+                var oid = this.getAttribute("oid");
+                mui.openWindow({
+                    url:'admin.php?controller=userorder&method=location_orderDetail&oid='+oid,
+                    id:'orderdetail'
+                })
+            });
 			//是否确认收货
 			mui('.li-cell').on('tap','.menu-sure',function(){
+                var oid = this.getAttribute("oid");
 				mui.confirm('确认已经收到您的订单？','确认收货',new Array('取消','确定'),function(e){
 					if(e.index==1){
-						document.getElementById('menu-sure').style.display='none';
-					    document.getElementById('menu-access').style.display='block'; 
+						doajax("admin.php?controller=userorder&method=sureOrder",{
+						    oid:oid
+                        },"text",function (data) {
+                            if(data == 1){
+                                mui.toast("确认收货成功");
+                                window.location.reload();
+                            }else {
+                                mui.toast("确认收货失败");
+                            }
+                        });
 					}
 				});
 			});
+            //区支付
+            mui(".li-cell").on('tap','.menu-to-pay',function(){
+                var oid = this.getAttribute("oid");
+                mui.openWindow({
+                    url:'admin.php?controller=userorder&method=orderGoPay&oid='+oid,
+                    id:'orderdetail'
+                })
+            });
 			//评价界面
 			mui('.li-cell').on('tap','.menu-access',function(){
+                var oid = this.getAttribute("oid");
 				mui.openWindow({
-					url:'admin.php?controller=userorder&method=location_evaluatePage',
+					url:'admin.php?controller=userorder&method=location_evaluatePage&oid='+oid,
 					id:'menuaccess',
 //					show:{
 //						aniShow:'slide-in-bottom'
 //					}
 				})
 			});
-			document.getElementById('menu-access2').addEventListener('tap',function(){
-				mui.openWindow({
-					url:'admin.php?controller=userorder&method=location_evaluatePage',
-					id:'menuaccess',
-//					show:{
-//						aniShow:'slide-in-bottom'
-//					}
-				})
-			});
+//			document.getElementById('menu-access2').addEventListener('tap',function(){
+//				mui.openWindow({
+//					url:'admin.php?controller=userorder&method=location_evaluatePage',
+//					id:'menuaccess',
+////					show:{
+////						aniShow:'slide-in-bottom'
+////					}
+//				})
+//			});
 		</script>
 </html>

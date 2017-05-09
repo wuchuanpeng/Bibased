@@ -32,6 +32,25 @@
             $result = DB::findOne($sql);
             return $result;
         }
+
+        /**
+         * 订单页面去支付
+         * @param $oid
+         * @return  mixed
+         */
+        function orderGoPay($oid) {
+            $sql = "SELECT O_RealPrice,S_ShopName FROM r_order,r_farmshop,r_seller WHERE O_ID = $oid AND O_Status = 1 AND O_FID = F_ID  AND F_Status = 1 AND F_SID = S_ID AND S_Status = 1";
+            $result = DB::findOne($sql);
+            return array("sum" => $result["O_RealPrice"], "shopName" => $result["S_ShopName"],
+                "orderId" => $oid);
+        }
+
+        function sureOrder($oid) {
+            $table = "r_order";
+            $arr = array("O_HandleState"=>2, "O_Update" => time());
+            $where = "O_ID = $oid";
+            return DB::update($table,$arr,$where);
+        }
     }
 
 ?>
