@@ -2,6 +2,7 @@
 class userorderController{
     public $userId;
     public $userObj;
+    public $userOrderObj;
 
     public function __construct(){
         if(!(isset($_SESSION['loginuser']))){
@@ -10,6 +11,7 @@ class userorderController{
         }else{
             $this->userId=isset($_SESSION['buyer_id'])?$_SESSION['buyer_id']:array();
             $this->userObj=M('usershop');
+            $this->userOrderObj = M("userorder");
         }
     }
 
@@ -17,7 +19,10 @@ class userorderController{
      * 加载order主页面
      */
     function index(){
+        $back = $this ->userOrderObj ->getAllOrder();
+        VIEW::assign(array("orderAll" => $back));
         VIEW::display('buyer/orderN.php');
+
     }
 
     /**

@@ -279,7 +279,7 @@
 
     </script>
 	<script type="text/javascript">
-        var LIST_NUM = 10;
+        var LIST_NUM = 1;//设置一次加载多少条数据
 		//下拉刷新时将搜索栏隐藏
 		var headDiv1=document.getElementById("header-div1");
 		mui.init({

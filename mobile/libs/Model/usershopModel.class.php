@@ -222,13 +222,32 @@
          * @param $oid 订单id
          */
         function orderPay($oid) {
+            DB::query("BEGIN");
             $table = "r_order";
             $arr = array();
             $arr["O_PayState"] = 1;
             $arr["O_PayTime"] = time();
             $where = "O_Status = 1 AND O_ID = $oid";
             $result = DB::update($table, $arr, $where);
-            return $result;
+            $sql = "SELECT F_SID,O_RealPrice,S_Account FROM r_order,r_farmshop,r_seller WHERE O_ID = $oid AND O_FID = F_ID AND F_SID = S_ID AND S_Status =1 AND O_Status = 1 AND F_Status = 1";
+            $re = DB::findOne($sql);
+            $sid = $re["F_SID"];
+            $price = $re["O_RealPrice"];
+            $oldAcc = $re["S_Account"];
+
+            $table = "r_seller";
+            $arr2 = array();
+            $arr2["S_Account"] = $oldAcc + $price;
+            $arr2["S_Update"] = time();
+            $where = "S_Status = 1 AND S_ID = $sid";
+            $result2 = DB::update($table,$arr2,$where);
+
+            if ($result > 0 && $result2 > 0) {
+                DB::query("COMMIT");
+            }else {
+                DB::query("COLLBACK");
+            }
+            return $result2;
         }
     }
  ?>

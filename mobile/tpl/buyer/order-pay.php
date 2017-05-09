@@ -71,6 +71,7 @@
             },'text',function (data) {
             console.info(data);
             if (data > 0) {
+                mui.toast("支付成功");
                 window.location.href = "admin.php?controller=usershop&method=index";
             }else {
                 alert("支付失败");
