@@ -38,21 +38,38 @@
 			return DB::findAll($sql);
 		}
 
-		//查询农产品分类信息
+
+        /**
+         * 查询农产品分类信息
+         * @param $uid
+         * @return mixed
+         */
 		function ProductKind($uid){
 			$productmsg=self::shopMsg($uid,'agrProduct');
 			$productKinds=self::dataQuery('R_ProductKind','K_Status>0 and K_FID='.$productmsg['F_ID'],'K_ID ASC');
 			// var_dump($productKinds);
 			return $productKinds;
 		}
-		//查询农产品分类名为多少的id
+
+        /**
+         * 查询农产品分类名为多少的id
+         * @param $uid
+         * @param $agrtype
+         * @return mixed
+         */
 		function ProductKind_Name($uid,$agrtype){
 			$productmsg=self::shopMsg($uid,'agrProduct');
 			$K_FID=$productmsg['F_ID'];//获取农产品所属店铺的ID
 			$sql="select * from R_ProductKind where K_Status>0 and K_FID=".$K_FID." and K_Name='".$agrtype."'";
 			return DB::findOne($sql);
 		}
-		//查询房间分类名为多少的id
+
+        /**
+         * 查询房间分类名为多少的id
+         * @param $uid
+         * @param $roomtype
+         * @return mixed
+         */
 		function Roomtype_Name($uid,$roomtype){
 			$hotelmsg=self::shopMsg($uid,'hotel');
 			$sql="select * from R_RomeType where T_Status>0 and T_FID=".$hotelmsg['F_ID']." and T_Name='".$roomtype."'";
@@ -60,7 +77,11 @@
 		}
 
 
-//查出房间的各种信息
+    /**
+     * 查出房间的各种信息
+     * @param $uid
+     * @return array
+     */
 		function HotelMsg($uid){
 			$hotelmsg=self::shopMsg($uid,'hotel');
 			$hotelRoomType=self::dataQuery('R_RomeType','T_Status>0 and T_FID='.$hotelmsg['F_ID'],'T_ID ASC');//查出房间类型
@@ -79,10 +100,15 @@
 						  'totalRoomNum' => $totalRoomNum);
 			return $back;
 		}
-// 查阅农产品的各种信息
+
+    /**
+     * 查阅农产品的各种信息
+     * @param $uid
+     * @return array
+     */
 		function ProductMsg($uid){
 			$agrProduct=array();
-			$$agrProductImg=array();
+			$agrProductImg=array();
 			$productmsg=self::shopMsg($uid,'agrProduct');
 			$productKinds=self::dataQuery('R_ProductKind','K_Status>0 and K_FID='.$productmsg['F_ID'],'K_ID ASC');
 			$proKindCount=count($productKinds);
@@ -105,8 +131,12 @@
 			return $back;
 		}
 
-	
-		//保存农产品的新分类
+        /**
+         * 保存农产品的新分类
+         * @param $newname
+         * @param $uid
+         * @return array
+         */
 		function saveNewType($newname,$uid){
 			$back=array();
 			$productmsg=self::shopMsg($uid,'agrProduct');
@@ -126,7 +156,12 @@
 			return $back;
 		}
 
-//删除分类,并删除分类下的商品
+    /**
+     * 删除分类,并删除分类下的商品
+     * @param $dtype 要删除的分类
+     * @param $uid
+     * @return bool
+     */
 		function deleteAgrType($dtype,$uid){
 			$res=self::ProductKind_Name($uid,$dtype);
 			$K_ID=$res['K_ID'];
@@ -155,7 +190,12 @@
 			return $back;
 		}
 
-		//新商品名称的判断,是否重复...酒店
+        /**
+         * 新商品名称的判断,是否重复...酒店
+         * @param $hname
+         * @param $uid
+         * @return array
+         */
 		function HotelNameJudge($hname,$uid){
 			$back = array();
 			$res=self::Roomtype_Name($uid,$hname);
@@ -177,7 +217,17 @@
 			}
 			return $back;
 		}
-//添加房间新商品
+
+    /**
+     * 添加房间新商品
+     * @param $rname
+     * @param $rremain 数量
+     * @param $rprice 价格
+     * @param $rimg
+     * @param $roomNum
+     * @param $uid
+     * @return bool
+     */
 		function saveNewHotelCommodity($rname,$rremain,$rprice,$rimg,$roomNum,$uid){
 			$hotelmsg=self::shopMsg($uid,'hotel');
 			$time=time();
@@ -212,7 +262,17 @@
 			mysql_query("END");
 			return $back;
 		}
-//保存新的农产品信息
+
+    /**
+     * 保存新的农产品信息
+     * @param $aname
+     * @param $aremain
+     * @param $aprice
+     * @param $aimg
+     * @param $agrtype
+     * @param $uid
+     * @return bool
+     */
 		function saveNewAgrCommodity($aname,$aremain,$aprice,$aimg,$agrtype,$uid){
 			$res=self::ProductKind_Name($uid,$agrtype);
 			$K_ID=$res['K_ID'];
@@ -240,7 +300,11 @@
 			mysql_query("END");
 			return $back;
 		}
-//查询修改的商品信息
+    /**
+     * 查询修改的商品信息
+     * @param $agrId
+     * @return array
+     */
 		function reviseAgrMsg($agrId){
 			$back=array();
 			$sql="select * from R_Product where P_Status>0 and P_ID=".$agrId;
@@ -274,7 +338,18 @@
 			$back['L_ImgUrl']=$res['L_ImgUrl'];
 			return $back;
 		}
-//修改农产品信息
+
+    /**
+     * 修改农产品信息
+     * @param $aname
+     * @param $aremain
+     * @param $aprice
+     * @param $aimg
+     * @param $agrtype
+     * @param $aid
+     * @param $uid
+     * @return bool
+     */
 		function modAgrCommodity($aname,$aremain,$aprice,$aimg,$agrtype,$aid,$uid){
 			$res=self::ProductKind_Name($uid,$agrtype);
 			$K_ID=$res['K_ID'];//获取新的分类的id
@@ -336,6 +411,11 @@
 			return $back;
 		}
 
+        /**
+         * 删除商品
+         * @param $rtid
+         * @return bool
+         */
 		function deleteDefaultRoom($rtid){
 			$where="R_Status>0 and R_TID=".$rtid;
 			$delRes=DB::del('R_Rome',$where);
@@ -385,4 +465,17 @@
 			mysql_query("END");
 			return $back;
 		}
+
+        /** 修改商店图片
+         * @param $imgUrl
+         * @param $uid
+         * @return mixed\
+         */
+		function uploadShopImg($imgUrl,$uid){
+            $modShopArr = array('S_ShopImgUrl' => $imgUrl,
+                                'S_Update' => time());
+            $where = "S_Status = 1 AND S_UID = ".$uid;
+            $table = "R_Seller";
+            return DB::update($table,$modShopArr,$where);
+        }
 }?>

@@ -26,8 +26,10 @@ header("Content-type: text/html; charset=utf-8"); ?>
         <div class="commodity-content mui-active" id="commodity-content">
         	<div class="content-header">
         		<div class="shop-img">
-        			<input type="file"  id="photo-select"/>
-        			<img src="{$shopImg}"/>
+                    <form method="post" action="admin.php?controller=sellercommodity&method=uploadShopImg" name="imgForm" enctype="multipart/form-data">
+                        <input type="file" id="photo-select" name="photo-select" value=""/>
+                    </form>
+        			<img id="shop-img" src="{$shopImg}"/>
         		</div>
         		<a href="admin.php?controller=sellercommodity&method=location_addCommodity" class="add-commodity">添加商品</a>
         		<div class="shop-name">
@@ -130,5 +132,10 @@ header("Content-type: text/html; charset=utf-8"); ?>
 				produceManage();
 			});
 		}
-	</script>	
+	</script>
+    <script>
+        document.getElementById('photo-select').addEventListener("change",function () {
+            document.imgForm.submit();
+        });
+    </script>
 </html>

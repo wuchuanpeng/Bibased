@@ -139,8 +139,29 @@
                 header("Location:admin.php?controller=sellerhome&method=location_msgMod");
             }
         }
+
+        /**
+         * 显示查看店铺评价页面
+         */
         function location_ShopEval(){
             VIEW::display('seller/home-shopEvaluate.php');
+        }
+
+        /**
+         * 获取评论信息
+         */
+        function getEvaluateList(){
+            $startItem = $_POST['startItem'];
+            $listNum = $_POST['listNum'];
+            $back = $this -> sellerObj -> getEvaluateList($startItem,$listNum,$this -> sellerId);
+            echo json_encode($back);
+        }
+
+        function saveSellerReply(){
+            $reply = $_POST['reply'];
+            $eid = $_POST['eid'];
+            $back = $this -> sellerObj -> saveSellerReply($reply,$eid);
+            echo json_encode($back);
         }
 	}
  ?>

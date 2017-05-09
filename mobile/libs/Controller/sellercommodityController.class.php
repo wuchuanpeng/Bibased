@@ -17,7 +17,10 @@
 							  'shopName' => $data['S_ShopName']));
 			VIEW::display('seller/seller-commodity.php');
 		}
-//动态引入酒店的数据
+
+    /**
+     * 动态引入酒店的数据
+     */
 		function ajaxHotel(){
 			$sellerobj=M("sellercommodity");
 			$data=$sellerobj->HotelMsg($this->sellerId);
@@ -38,7 +41,9 @@
 			VIEW::display('seller/produce-manage.php');
 		}
 
-
+        /**
+         * 加载添加商品页面
+         */
 		function location_addCommodity(){
 			$sellerobj=M("sellercommodity");
 			$productKinds=$sellerobj->ProductKind($this->sellerId);
@@ -51,7 +56,10 @@
 			VIEW::assign(array('defaulttype' => $defaulttype));
 			VIEW::display('seller/add-product.php');
 		}
-//为新添加的农产品选择分类
+
+    /**
+     * 为新添加的农产品选择分类
+     */
 		public function showpage()
 		{
 			$sellerobj=M("sellercommodity");
@@ -59,7 +67,10 @@
 			VIEW::assign(array('productKinds' => $productKinds));
 			VIEW::display('seller/select-newprotype.php');
 		}
-//ajax保存新添加的分类
+
+    /**
+     * ajax保存新添加的分类
+     */
 		function save_newType(){
 			$back = array();
 			$newTypeName=$_POST['newTypeName'];
@@ -67,7 +78,10 @@
 			$back=$sellerobj->saveNewType($newTypeName,$this->sellerId);
 			echo json_encode($back);
 		}
-//ajax删除农产品的分类
+
+    /**
+     * ajax删除农产品的分类
+     */
 		function delete_AgrType(){
 			$deleteAgrType=$_POST['deleteAgrType'];
 			$sellerobj=M("sellercommodity");
@@ -75,7 +89,10 @@
 			echo json_encode($back);
 		}
 
-		//新商品名称的判断,是否重复...酒店
+
+    /**
+     * 新商品名称的判断,是否重复...酒店
+     */
 		function ajaxHotelNameJudge(){
 			$back = array();
 			$newHotelName=$_POST['newHotelName'];
@@ -83,7 +100,10 @@
 			$back=$sellerobj->HotelNameJudge($newHotelName,$this->sellerId);
 			echo json_encode($back);
 		}
-		//新商品名称的判断,是否重复...农产品
+
+    /**
+     * 新商品名称的判断,是否重复...农产品
+     */
 		function ajaxAgrNameJudge(){
 			$back = array();
 			$newAgrName=$_POST['newAgrName'];
@@ -99,7 +119,10 @@
 			echo json_encode($back);
 		}
 
-//添加新的商品信息,修改信息
+
+    /**
+     * 添加新的商品信息,修改信息
+     */
 		function add_newProduct(){
 			$agrHotel=$_POST['agr-hotel'];//获取隐藏表单域值,表示是添加农产品还是房间
 			$commodityname=$_POST['commodity-name'];
@@ -140,14 +163,16 @@
 		}
 
 
-
+        /**
+         * 修改商品页面
+         */
 	    function location_reviseProduct(){
-	    	$commodityId=$_GET['id'];
-	    	$commodMsg=explode('-',$commodityId);
-	    	if($commodMsg[0]=="agrProduct"){
-	    		$agrId=$commodMsg[1];//获取农产品的id
-	    		$sellerobj=M("sellercommodity");
-				$data=$sellerobj->reviseAgrMsg($agrId);
+	    	$commodityId = $_GET['id'];
+	    	$commodMsg = explode('-',$commodityId);
+	    	if($commodMsg[0] == "agrProduct"){
+	    		$agrId = $commodMsg[1];//获取农产品的id
+	    		$sellerobj = M("sellercommodity");
+				$data = $sellerobj->reviseAgrMsg($agrId);
 				VIEW::assign(array('defaultKind' => $data['K_Name'],
 									'defaultName' => $data['P_Name'],
 									'defaultPrice' => $data['P_Price'],
@@ -156,9 +181,9 @@
 									'defaultId' => $agrId,
 	    					  		'commodType' => "农产品"));
 	    	}else{
-	    		$roomTypeId=$commodMsg[1];//获取房间类型的id
-	    		$sellerobj=M("sellercommodity");
-				$data=$sellerobj->reviseHotelMsg($roomTypeId);
+	    		$roomTypeId = $commodMsg[1];//获取房间类型的id
+	    		$sellerobj = M("sellercommodity");
+				$data = $sellerobj->reviseHotelMsg($roomTypeId);
 				// var_dump($data['roomdata']);
 				VIEW::assign(array('defaultName' => $data['T_Name'],
 									'defaultPrice' => $data['T_Price'],
@@ -170,17 +195,34 @@
 	    	}
 	    	VIEW::display('seller/revise-product.php');
 	    }
-	
+
+        /**
+         * 删除商品
+         */
 	    function delete_commodity(){
-	    	$id=$_POST['id'];
-	    	$type=$_POST['type'];
-	    	$sellerobj=M("sellercommodity");
-	    	$back=$sellerobj->deleteCommodity($id,$type);
+	    	$id = $_POST['id'];
+	    	$type = $_POST['type'];
+	    	$sellerobj = M("sellercommodity");
+	    	$back = $sellerobj->deleteCommodity($id,$type);
 	    	echo json_encode($back);
 	    }
 
+        /**
+         *上传商店头像照片
+         */
+	    function uploadShopImg(){
+            $newShopImg = $_FILES['photo-select'];
+            $indexObj = M('index');
+            $imgUrl = $indexObj -> upload_imag($newShopImg);
+            $sellerObj = M('sellercommodity');
+            $back = $sellerObj -> uploadShopImg($imgUrl,$this -> sellerId);
+            if($back){
+                header("Location:admin.php?controller=sellercommodity&method=index");
+            }
+        }
+
 		private function showmessage($info){
-			echo "<script>alert('$info');</script>";
+			echo "<script>mui.toast('$info');</script>";
 			exit;
 		}
 }?>
