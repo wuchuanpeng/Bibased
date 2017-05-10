@@ -80,6 +80,49 @@
             return array("sellerInfo" => $result1, "buyerInfo" => $result2, "agrorders" => $result3);
         }
 
+        /**
+         * 跳转到评价
+         * @param $oid
+         * @return array
+         */
+        function evaluatePage($oid) {
+            $sql = "SELECT S_ShopName,S_ShopImgUrl,O_ID FROM r_order,r_farmshop,r_seller WHERE O_ID = $oid AND O_Status = 1 AND O_FID = F_ID AND F_Status = 1 AND F_SID = S_ID AND S_Status = 1";
+            $result1 = DB::findOne($sql);
+            return array("orderInfo" => $result1);
+        }
+
+        /**
+         * 评价
+         * @param $arr
+         * @return mixed
+         */
+        function submitAccess($arr) {
+            $imgurl = $arr["imgurl"];
+            unset($arr["imgurl"]);
+            DB::query("BEGIN");
+            $table = "r_evaluate";
+            $arr["E_Date"] = time();
+            $arr["E_Update"] = time();
+            $eid = DB::insert($table,$arr);
+            if ($imgurl == "") {
+                DB::query("COMMIT");
+                return $eid;
+            }
+            $table="r_uploadfiles";
+            $arr2 = array();
+            $arr2["L_Type"] = 2;
+            $arr2["L_SpecificID"] = $eid;
+            $arr2["L_ImgUrl"]= $imgurl;
+            $arr2["L_Date"] = time();
+            $arr2["L_Update"] = time();
+            $uid = DB::insert($table,$arr2);
+
+            if($eid > 0 && $uid > 0) {
+                DB::query("COMMIT");
+                return $uid;
+            }
+            DB::query("ROLLBACK");
+        }
     }
 
 ?>
