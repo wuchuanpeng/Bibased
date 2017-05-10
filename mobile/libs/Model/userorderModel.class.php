@@ -45,12 +45,41 @@
                 "orderId" => $oid);
         }
 
+        /**
+         * 确认收货
+         * @param $oid
+         * @return mixed
+         */
         function sureOrder($oid) {
             $table = "r_order";
             $arr = array("O_HandleState"=>2, "O_Update" => time());
             $where = "O_ID = $oid";
             return DB::update($table,$arr,$where);
         }
+
+        /**
+         * 获取订单详情
+         * @param $oid
+         * @return array
+         */
+        function orderDetail($oid) {
+            $sql = "SELECT S_ID,S_ShopName,S_ShopImgUrl,F_Tel,O_ID,O_RealPrice,O_PayState,O_HandleState,O_BID,O_No,O_Date,O_Desc FROM r_order,r_farmshop,r_seller WHERE O_ID = $oid AND O_Status = 1 AND O_FID = F_ID AND F_Status = 1 AND F_SID = S_ID AND S_Status = 1";
+            $result1 = DB::findOne($sql);
+            $bid = $result1["O_BID"];
+            $sql = "SELECT B_Tel,B_ReceiptAddr FROM r_buyer WHERE B_Status = 1 AND  B_ID = $bid";
+            $result2 = DB::findOne($sql);
+            $sql = "SELECT A_Name,A_Count,A_RealPrice FROM r_agrorder WHERE A_OID = 6 AND A_Status = 1";
+            $result3 = DB::findAll($sql);
+            $sql = "SELECT count(*) `count` FROM r_evaluate WHERE E_OID = $oid AND E_Status = 1 AND E_ReplyID = -1";
+            $re = DB::findOne($sql);
+            if ($re["count"] > 0) {
+                $result1["isEvaluate"] = 1;
+            }else {
+                $result1["isEvaluate"] = 0;
+            }
+            return array("sellerInfo" => $result1, "buyerInfo" => $result2, "agrorders" => $result3);
+        }
+
     }
 
 ?>

@@ -36,6 +36,9 @@ class userorderController{
      * 加载订单详情
      */
     function location_orderDetail(){
+        $oid = $_GET["oid"];
+        $result = $this ->userOrderObj->orderDetail($oid);
+        VIEW::assign($result);
         VIEW::display("buyer/order-detail.php");
     }
     /**
