@@ -11,16 +11,19 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #000000"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" style="color: #000000" href="admin.php?controller=userhome&method=index"></a>
     		<h1 class="mui-title">用户信息修改</h1>
 		</header>
 		<div class="msgmod-content" style="padding-top:44px;">
 			<ul class="mui-table-view msgmod-list" style="margin-top: 6px;">
                 <li class="mui-table-view-cell mui-collapse-content">
-                    <a class="mui-navigate-right" href="#msgmod-name" style="padding: 3px 15px; line-height: 37px;">
-                    	<span class="list-image">头像</span>
-                    	<span class="user-image"><img src="{$userImg}"/></span>
-                    </a>
+                    <form name="uploadForm" action="admin.php?controller=userhome&method=uploadUserImg" method="post" enctype="multipart/form-data">
+                        <a class="mui-navigate-right" href="#msgmod-name" style=" line-height: 21px;width:100%;height: 100%;">
+                            <span class="list-image">头像</span>
+                            <input name="upload-img" id="upload-img" type="file" value="">
+                            <span class="user-image"><img src="{$userImg}" style="margin-top: -8px;"/></span>
+                        </a>
+                    </form>
                 </li>
                 <li class="mui-table-view-cell mui-collapse-content">
                     <a class="mui-navigate-right" href="admin.php?controller=userhome&method=modName&flag=1">
@@ -43,24 +46,14 @@
             </ul>
             <input type="button" value="退出登录" onclick="loginOut()" id="login-out"/>
 		</div>
-		<div id="msgmod-name" class="mui-popover mui-popover-action mui-popover-bottom">
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#">拍照</a>
-				</li>
-				<li class="mui-table-view-cell">
-					<a href="#">从手机相册选择</a>
-				</li>
-			</ul>
-			<ul class="mui-table-view">
-				<li class="mui-table-view-cell">
-					<a href="#msgmod-name"><b>取消</b></a>
-				</li>
-			</ul>
-		</div>
+
 	</body>
 		<script src="buyerstyle/js/mui.min.js"></script>
 		<script type="text/javascript">
+            document.getElementById('upload-img').addEventListener('change',function () {
+                document.uploadForm.submit();
+            });
+
 			mui.init()
 			function loginOut(){
 				window.location.href="admin.php?controller=userhome&method=user_loginOut";

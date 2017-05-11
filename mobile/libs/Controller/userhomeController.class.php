@@ -53,6 +53,10 @@
 		function modPassword(){
 			VIEW::display('buyer/msgmod-mod.php');
 		}
+
+        /**
+         * 保存新密码
+         */
 		function save_newPassword(){
 			$backvalue=array();
 			$oldPsd=$_POST['oldpwd'];
@@ -93,6 +97,19 @@
 		function location_talkbox(){
 			VIEW::display('buyer/talkbox-talk.php');
 		}
+
+		function uploadUserImg(){
+            $newImg = $_FILES['upload-img'];
+            $indexObj = M("index");
+            $newImg = $indexObj -> upload_imag($newImg);
+            $userObj=M('userhome');
+            $back = $userObj -> uploadUserImg($newImg,$this->userId);
+            if($back){
+                header("Location:admin.php?controller=userhome&method=userMessage");
+            }
+
+        }
+
 	}
 
  ?>

@@ -25,7 +25,7 @@ function reg(){
 * @return  
 */  
 function doajax(url, param, datat, callback) {  
-    $.ajax({  
+    $.ajax({
         type: "post",  
         url: url,  
         data: param,  
@@ -35,7 +35,7 @@ function doajax(url, param, datat, callback) {
             alert("ajax error"); 
         }  
     });  
-}  
+}
 
 //reg.php后台判断验证码是否正确,正确就后台数据库保存,错误就刷新验证码
 function codeJudge(){

@@ -358,7 +358,6 @@
                         data:{},
                         dataType: 'json',
                         success: function (data){
-                            console.info(data);
                             $("#access_show_img").attr("src",data[0]);
                             $("#imgUrl").val(data[0]);
                             $("#clear-img").css("display","block");

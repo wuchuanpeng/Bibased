@@ -164,8 +164,6 @@
                                 '<li><img src="' + item.eval_Pic + '" data-preview-src="" data-preview-group="1"/></li>'+
                             '</ul>';
                 }
-
-            str += '<span class="label-evaluation">味道好,风雨无阻,送货快</span>';
                 if(item.seller_Reply != ""){
                     str += '<div class="seller-reply">'+
                                 '<p>商家回复:<span>' + item.seller_Reply + '</span></p>'+
@@ -207,7 +205,7 @@
             topItem[i].style.marginTop=window.innerWidth*3/200+'px';
         }
         //计算顶部的值
-        document.getElementById('left-grade').innerHTML = parseFloat(countScore / countNum);
+        document.getElementById('left-grade').innerHTML = (countScore / countNum).toFixed(1);
         document.getElementById('right-grade').innerHTML = Percentage(goodEval,countNum);
         reply_tap();
     }

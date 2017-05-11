@@ -37,9 +37,7 @@
 	                    </div>
 	                    <a href="admin.php?controller=userhome&method=userMessage">{$userName} ></a>
 	                </div> 
-	                <div class="talk-div" onclick="window.location.href='admin.php?controller=userhome&method=location_MyTalkbox'">
-	                	<img src="buyerstyle/img/conver1.png"/>
-	                </div>
+
 	           	</div>
 	           	<!-- <div class="mui-table-view home-menu">
 	           		<ul class="home-menu-item">

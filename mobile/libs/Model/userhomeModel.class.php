@@ -28,6 +28,13 @@
 			}
 			return $back;
 		}
+		function uploadUserImg($newImg,$uid){
+            $updateArr = array('B_ImgUrl' => $newImg,
+                                'B_Update' => time());
+            $where = "B_Status = 1 AND B_UID = ".$uid;
+            $table = "R_Buyer";
+            return DB::update($table,$updateArr,$where);
+        }
 	}
 
  ?>
