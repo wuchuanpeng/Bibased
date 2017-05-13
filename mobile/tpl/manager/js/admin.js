@@ -1,4 +1,6 @@
-
+/**
+ * 商家店铺管理操作
+ */
 function opFormat(value, row) {
 
 	var str='<a  style="text-decoration:none;" href="#" onclick="showModal(this';
@@ -10,13 +12,56 @@ function opFormat(value, row) {
 	str+=')">修改</a>';
     return str;
 }
+/**
+ * 信息反馈页面的操作处理
+ * @param value
+ * @param row
+ * @returns {string}
+ */
 function messageFormat(value, row) {
-
-	var str='<a  style="text-decoration:none;" href="javascript:;"  onclick="toDeleteMessage('+row.M_ID+')">删除</a>';
-
+	var str = "";
+	if (row.gstate == "否") {
+        str = '<a  style="text-decoration:none;" href="javascript:;"  onclick="toUpdateMessage(' + row.gid + ')">处理</a>';
+	}
     return str;
 }
-
+/**
+ * 信息反馈页面的处理状态信息处理
+ * @param gid
+ */
+function toUpdateMessage(gid) {
+    $.ajax({
+        url:"manager.php?controller=root&method=updateMessage",
+        type:"post",
+        data:{
+            gid:gid
+        },
+        success:function(data){
+            if(data==1){
+                $("#myConfirm").modal('hide');
+               	$("#FeedbackTable").bootstrapTable("refresh");
+            }else{
+                $("#myConfirm").modal('hide');
+                myAlert("处理失败!");
+            }
+        },
+        error:function(){
+            console.log("ajax错误啊");
+        }
+    });
+}
+/**
+ * 店铺管理页面数据显示和界面显示
+ * @param obj
+ * @param id
+ * @param shopname
+ * @param shopaddr
+ * @param shopowner
+ * @param shoptel
+ * @param sdesc
+ * @param spassword
+ * @param uid
+ */
 function showModal(obj,id,shopname,shopaddr,shopowner,shoptel,sdesc,spassword,uid){
 	$("#myModalLabel").html(shopname);
 
@@ -32,7 +77,10 @@ function showModal(obj,id,shopname,shopaddr,shopowner,shoptel,sdesc,spassword,ui
 	$("#myModal").modal('show');
 
 }
-
+/**
+ * 店铺信息修改保存
+ * @returns {boolean}
+ */
 function submit(){
 	$("#admin_alert_msg").text("");
     var sid = $("#sid").val();
@@ -90,12 +138,13 @@ function submit(){
 
 }
 
-
+/**
+ * 店铺信息删除操作
+ */
 function toDelete(){
 	$("#myModal").modal('hide');
 	myConfirm("删除后不能撤回,确定删除吗?","deletea()");
 }
-
 function deletea(){
 	$.ajax({
 		url:"manager.php?controller=root&method=deleteSeller",
@@ -119,39 +168,25 @@ function deletea(){
 		}
 	});
 }
-
+/**
+ * 店铺表的刷新
+ */
 function refresh(){
 	$("#systemLogTable").bootstrapTable("refresh");
 }
 
-/*************user js*************/
-// function userFormat(value,row){
-// 	//console.log(row);
-// 	var update='<a  style="text-decoration:none;" href="#" onclick="toUserUpdate(this';
-// 	for(var i in row){
-// 		update+=",'";
-// 		//console.log(i);
-// 		eval("update+=row."+i+";");
-// 		update+="'";
-// 	}
-// 	update+=')">查看</a>&nbsp;';
-// 	var del='<a  style="text-decoration:none;" href="#" onclick="toUserDelete('+row.U_ID+')">删除</a>';
-//     return update+del;
-// }
-
-function phoneFormat(value,row){
-	var str="<a href='tel:"+row.U_Phone+"'>"+row.U_Phone+"</a>";
-	return str;
-}
-
-// 添加商家
+/**
+ * 添加商家
+ */
 function toUserInsert(){
 	cleanInput();
 	$("#myModal2Label").html("添加用户");
 	$("#myModal2").modal('show');
 	$("#add-seller").attr("onclick","userInsert()");
 }
-//数据判断
+/**
+ * 数据判断
+ */
 function checkInput(){
 	var shopName=$("#shopName").val();
 	var shopAddress=$("#shopAddress").val();
@@ -164,12 +199,10 @@ function checkInput(){
 		$("#myModal2Message").html("*店铺名称不能为空*");
 		return false;
 	}
-
 	if($.trim(shopAddress)==""){
 		$("#myModal2Message").html("*店铺地址不能为空*");
 		return false;
 	}
-	
 	if($.trim(shopOwner)==""){
 		$("#myModal2Message").html("*店主不能为空*");
 		return false;
@@ -178,21 +211,22 @@ function checkInput(){
 		$("#myModal2Message").html("*手机不能为空*");
 		return false;
 	}
-
 	if($.trim(userPwd)==""||$.trim(userPwdCon)==""||$.trim(userPwd) != $.trim(userPwdCon)){
 		$("#myModal2Message").html("*请正确输入密码及确认密码*");
 		return false;
 	}
 	return true;
 }
-
+/**
+ * 数据库保存新插入的店铺信息
+ * @returns {boolean}
+ */
 function userInsert(){
     var shopAddress=$("#shopAddress").val();
 	if(!checkInput()){
 		return false;
 	}
 	getLatlng(shopAddress);
-
 }
 function userInsertSave(latlng) {
     var shopName=$("#shopName").val();
@@ -210,7 +244,7 @@ function userInsertSave(latlng) {
             shopTel:shopTel,
             userPwd:userPwd,
             latlng:latlng,
-            desc:$("#desc").val()
+            sdesc:$("#sdesc").val()
         },
         success:function(data){
             if(data==1){
@@ -228,6 +262,9 @@ function userInsertSave(latlng) {
         }
     });
 }
+/**
+ * 清空表单
+ */
 function cleanInput(){
 	$("#myModal2Message").html("");
 	$("#shopName").val("");
@@ -235,89 +272,12 @@ function cleanInput(){
 	$("#shopOwner").val("");
 	$("#shopTel").val("");
 	$("#userPwd").val("");
-	$("#desc").val("");
+    $("#userPwdCon").val("");
+	$("#sdesc").val("");
 }
 
 
-function userRefresh(){
-	$("#userTable").bootstrapTable("refresh");
-}
 
-
-function toUserDelete(uid){
-	myConfirm("删除后不能撤回,确定删除吗?","userDeletea("+uid+")");
-}
-
-function userDeletea(uid){
-	$.ajax({
-		url:"userajax.php",
-		type:"post",
-		data:{
-			U_Status:"-1",
-			U_ID:uid,
-			flag:2
-		},
-		success:function(data){
-			console.log(data);
-			if(data==1){
-				$("#myConfirm").modal('hide');
-				myAlert("删除成功");
-				userRefresh();
-			}else{
-				$("#myConfirm").modal('hide');
-				myAlert("删除失败");
-			}
-		},
-		error:function(){
-			console.log("ajax错误啊");
-		}
-	});
-}
-
-function toDeleteMessage(mid){
-	myConfirm("删除后不能撤回,确定删除吗?","deleteMessage("+mid+")");
-}
-function deleteMessage(mid){
-	console.info(mid);
-	$.ajax({
-		url:"messageajax.php",
-		type:"post",
-		data:{
-			M_Status:"-1",
-			M_ID:mid,
-			flag:1
-		},
-		success:function(data){
-			if(data==1){
-				$("#myConfirm").modal('hide');
-				myAlert("删除成功");
-				$("#messageTable").bootstrapTable("refresh");
-			}else{
-				$("#myConfirm").modal('hide');
-				myAlert("删除失败");
-			}
-		},
-		error:function(){
-			console.log("ajax错误啊");
-		}
-	});
-}
-
-function readMessage(){
-	$.ajax({
-		url:"messageajax.php",
-		type:"post",
-		data:{
-			flag:2
-		},
-		success:function(data){
-			$("#countMessage").text("0");
-		},
-		error:function(){
-			console.log("ajax错误啊");
-		}
-	});
-}
 
 function getLatlng(address) {
     address=encodeURI(address);

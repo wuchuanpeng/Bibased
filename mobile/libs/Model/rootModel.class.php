@@ -54,7 +54,7 @@ class rootModel{
                                 'S_Coordinate' => $Seller['latlng'],
                                 'S_Name' => $Seller['shopOwner'],
                                 'S_Tel' => $Seller['shopTel'],
-                                'S_Desc' => $Seller['desc'],
+                                'S_Desc' => $Seller['sdesc'],
                                 'S_Date' => time());
         $table2 = 'R_Seller';
         $insertId2 = DB::insert($table2,$insertSellerArr);
@@ -76,6 +76,33 @@ class rootModel{
             DB::query("ROLLBACK");
         }
         DB::query('END');
+    }
+
+    /**
+     * 获取反馈信息列表
+     * @return mixed
+     */
+    function getFeedbackList(){
+        $sql = "SELECT G_ID gid,G_Name gname,G_Content gcontent,G_Phone gphone,G_State gstate,G_Date gdate,G_Desc gdesc FROM R_Suggest WHERE G_Status = 1";
+        $res = DB::findAll($sql);
+        foreach ($res as $key => $value){
+            $res[$key]['gno'] = $key + 1;
+            $res[$key]['gdate'] = date("Y-m-d H:i",$res[$key]['gdate'] );
+            $res[$key]['gstate'] = $res[$key]['gstate'] == 0 ? "否" : "是";
+        }
+        return $res;
+    }
+
+    /**
+     * 处理反馈信息
+     * @param $gid
+     * @return mixed
+     */
+    function updateMessageByGid($gid) {
+        $table = "R_Suggest";
+        $arr = array("G_State" => 1, "G_Update" => time());
+        $where = "G_ID = $gid";
+        return DB::update($table,$arr,$where);
     }
 }
 ?>

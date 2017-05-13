@@ -43,7 +43,7 @@
          * 保存更新的数据
          */
         function saveUpdateSeller(){
-            $updateUserArr = array('U_Password' => $_POST['sPwd'],
+            $updateUserArr = array('U_Password' => $_POST['password'],
                                     'U_Update' => time());
             $uid = $_POST['uid'];
             $updateSellerArr = array('S_ShopName' => $_POST['S_ShopName'],
@@ -75,13 +75,22 @@
          * 新商家
          */
         function saveNewSeller(){
-            $insertUserArr = array('U_LoginID' => $_POST['ShopTel'],
+            $insertUserArr = array('U_LoginID' => $_POST['shopTel'],
                                 'U_Password' => $_POST['userPwd'],
                                 'U_Right' => 0,
                                 'U_Date' => time());
             $Seller = $_POST;
             $back = $this -> rootObj -> saveNewSeller($insertUserArr,$Seller);
             echo $back;
+        }
+
+        function getFeedbackList(){
+            $feedbackList = $this -> rootObj -> getFeedbackList();
+            echo json_encode($feedbackList);
+        }
+        function  updateMessage() {
+            $gid = $_POST["gid"];
+            echo $this -> rootObj -> updateMessageByGid($gid);
         }
     }
 ?>

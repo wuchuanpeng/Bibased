@@ -163,5 +163,22 @@
             $back = $this -> sellerObj -> saveSellerReply($reply,$eid);
             echo json_encode($back);
         }
+
+        /**
+         * 反馈信息页面
+         */
+        function location_MyComments(){
+            $idtype = 0;
+            VIEW::assign(array('idtype' => $idtype));
+            VIEW::display('buyer/home-comments.php');
+        }
+
+        /**
+         * 保存用户反馈信息
+         */
+        function saveUserMsg(){
+            $backvalue = $this -> sellerObj -> saveSellerMsg($_POST['usercomment'],$_POST['usertel'],$this->sellerId);
+            echo json_encode($backvalue);
+        }
 	}
  ?>

@@ -123,6 +123,12 @@
             return $eval;
         }
 
+        /**
+         * 保存商家回复
+         * @param $reply
+         * @param $eid
+         * @return mixed
+         */
         function saveSellerReply($reply,$eid){
             $sql = "SELECT * FROM R_Evaluate WHERE E_Status =1 AND E_ID = ".$eid;
             $res = DB::findOne($sql);
@@ -133,6 +139,19 @@
             $table = "R_Evaluate";
             $insertId = DB::insert($table,$newEvalArr);
             return $insertId;
+        }
+
+        function saveSellerMsg($comment,$tel,$uid){
+            $sql = "SELECT S_Name FROM R_Seller WHERE S_Status = 1 AND S_UID = ".$uid;
+            $res = DB::findOne($sql);
+            $newArr = array('G_UID' => $uid,
+                            'G_Name' => $res['S_Name'],
+                            'G_Content' => $comment,
+                            'G_Phone' => $tel,
+                            'G_State' => 0,
+                            'G_Date' => time());
+            $table = "R_Suggest";
+            return DB::insert($table,$newArr);
         }
 	}
  ?>

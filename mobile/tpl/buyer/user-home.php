@@ -60,7 +60,7 @@
 	                </ul>
 	                <ul class="mui-table-view list-seller">
 	                	<li class="mui-table-view-cell mui-collapse-content">
-	                       	<a class="mui-navigate-right" style="margin-left: 5px; padding-left: 25px;" href="../seller/apply-settlement.php">商家入驻</a>
+	                       	<a class="mui-navigate-right" style="margin-left: 5px; padding-left: 25px;" href="">商家入驻</a>
 	                    </li>
 	                </ul>
 	                <ul class="mui-table-view list-service">

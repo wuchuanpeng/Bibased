@@ -36,7 +36,7 @@
 		            商家店铺管理
 		        </a>
 		    </li>
-		    <li  onclick="readMessage()" ><a href="#messageManage" data-toggle="tab">用户反馈</a></li>
+		    <li><a href="#UserFeedback" data-toggle="tab">用户反馈</a></li>
 		    <a href="javascript:;" onclick="logout()" style="float: right;font-size: 16px;position:relative;top:10px;"> <span class="glyphicon glyphicon-log-out"></span>登出</a>
 		</ul>
 		<div id="myTabContent" class="tab-content">
@@ -71,29 +71,26 @@
 					</div>
 				</div>
 		    </div>
-		    <div class="tab-pane fade in " id="messageManage">
+		    <div class="tab-pane fade in " id="UserFeedback">
 		        <div class="portlet box grey-cascade" style="margin-top:20px">
 					
 					<div class="portlet-body">
-						<table id="messageTable"
+						<table id="FeedbackTable"
 							data-toggle="table"
-							data-url="getmessage.php"
+							data-url="admin.php?controller=root&method=getFeedbackList"
 							data-pagination="true"
 							data-show-toggle="true"
 							data-show-refresh="true"
-							data-card-view="true"
 							data-search="true" >
-							
-
 						    <thead>
 						    <tr>
-						    	<th data-field="M_ID" data-visible="false"></th>
-						    	<th data-field="No" data-formatter="opFormatNo">序号</th>
-						        <th data-field="M_Name">姓名</th>
-						        <th data-field="M_Phone">手机</th>
-						        <th data-field="M_Email">邮箱</th>
-						        <th data-field="M_Message">内容</th>
-						        <th data-field="M_Date">时间</th>
+						    	<th data-field="gid" data-visible="false"></th>
+						    	<th data-field="gno">序号</th>
+                                <th data-field="gname">反馈人</th>
+						        <th data-field="gcontent">反馈内容</th>
+						        <th data-field="gphone">联系号码</th>
+						        <th data-field="gdate">时间</th>
+                                <th data-field="gstate">是否处理</th>
 						        <th data-field="format" data-formatter="messageFormat">操作</th>
 						    </tr>
 						    </thead>
@@ -212,9 +209,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="desc" class="col-xs-3 col-sm-2 control-label" style="position: relative;top:6px;" id="descLabel">备注</label>
+                                <label for="sdesc" class="col-xs-3 col-sm-2 control-label" style="position: relative;top:6px;" id="descLabel">备注</label>
                                 <div class="col-xs-9 col-sm-10">
-                                    <textarea class="form-control" id="desc" style="resize: none;"></textarea>
+                                    <textarea class="form-control" id="sdesc" style="resize: none;"></textarea>
                                 </div>
                             </div>
 		            	</form>

@@ -60,6 +60,11 @@
                         <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_set">其他设置</a>
                     </li>
                 </ul>
+                <ul class="mui-table-view" style="margin-top: 10px;">
+                    <li class="mui-table-view-cell mui-collapse-content">
+                        <a class="mui-navigate-right" href="admin.php?controller=sellerhome&method=location_MyComments">意见和反馈</a>
+                    </li>
+                </ul>
             </div>	  	
         </div>
 	</body>
