@@ -222,45 +222,49 @@ html,body,#user-home,#user-shop,#user-order{
 	padding-right: 15px;
 	border-bottom: 1px solid #eee5e5;
 }
-.content-evaluate .mui-table-view-cell .evaluate-detail{
-	width: 100%;
-	position: relative;
-	margin-top: 10px;
-	margin-bottom: 5px;
-}
-.evaluate-detail .detail-header{
-	float: left;
-	width: 15%;
-	position: relative;
-}
-.evaluate-detail .detail-header img{
-	width: 100%;
-	border-radius: 50%;
-}
-.evaluate-detail .detail-item{
+
+.content-evaluate .mui-table-view-cell .eval-item-content{
+	width: 82%;
 	float: right;
-	width: 81%;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #eee5e5;
 }
-.detail-item .item-user-time .item-user{
-	font-size: 15px;
+.eval-item-content .top-left{
+	width:100%;
+	height:20px;
+	line-height: 20px;
+	margin-top: 5px;
+}
+.top-left .shop-grade{
 	float: left;
+	margin-top: 2px;
 }
-.detail-item .item-user-time .item-time{
-	font-size: 12px;
+.top-left .customer-msg{
+	display: inline-block;
 	float: right;
-	color: #C5C5C6;
-}
-.detail-item .item-star{
-	height: 16px;
-}
-.item-star .grade-star{
 	font-size: 12px;
-	float: left;
-	line-height: 16px;
-	color: #C5C5C6;
+	color: #ccc;
 }
+.eval-item-content .img-group{
+	width: 100%;
+}
+.eval-item-content .img-group li{
+	height: 100%;
+	width: 30%;
+	float: left;
+	padding: 1% 1%;
+}
+.eval-item-content .img-group li:first-child{
+	padding-left: 0;
+}
+.eval-item-content .img-group li img{
+	width:100%;
+	height: 100%;
+}
+.eval-item-content .evaluate-word{
+	margin: 3px 0;
+	color: #000;
+	font-size: 14px;
+}
+
 .star-active{
 	width: 16px;
 	height: 16px;
@@ -275,27 +279,8 @@ html,body,#user-home,#user-shop,#user-order{
 	background: url(../img/zero-star.png) no-repeat center center / 12px 12px;
 	float: left;
 }
-
-.detail-item .item-eval{
-	color: #000;
-	font-size: 14px;
-	word-wrap: break-word;
-	padding: 3px;
-}
-.evaluate-detail .detail-evalmore{
-	height: 16px;
-	
-}
-.evaluate-evalmore .evalmore-item{
-	float: right;
-	padding-left: 23px;
-	background: url(../img/eval.png) no-repeat left center/ 18px 16px;
+.eval-item-content .seller-reply{
 	margin-top: 5px;
-	color: #000;
-	font-size: 14px;
-	margin-right: 5px;
-}
-.detail-item .seller-reply{
 	padding: 5px;
 	background-color: rgba(230,230,230,0.5);
 }

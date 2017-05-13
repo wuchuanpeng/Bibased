@@ -329,7 +329,6 @@
                 listNum:LIST_NUM
             };
             doajax("admin.php?controller=usershop&method=getSellerList",option,'json',function (data) {
-                console.info(data);
                 if (data.length == 0) {
                     mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
                 }else {

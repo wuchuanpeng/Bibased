@@ -5,12 +5,14 @@
 	class userhomeController 
 	{
 		public $userId;
+		public $userObj;
 		public function __construct(){
 			if(!(isset($_SESSION['loginuser']))){
 				header("Location:admin.php");
 				exit;
 			}else{
 				$this -> userId = isset($_SESSION['buyer_id']) ? $_SESSION['buyer_id'] : array();
+                $this -> userObj = M('userhome');
 			}
 		}
 
@@ -18,8 +20,7 @@
          * 加载user-home的页面
          */
 		public function index(){
-			$userObj = M('userhome');
-			$back = $userObj -> userMsg($this->userId);
+			$back = $this -> userObj -> userMsg($this->userId);
 			VIEW::assign(array('userImg' => $back['B_ImgUrl'],
 							   'userName' => $back['B_Name']));
 			VIEW::display('buyer/user-home.php');
@@ -29,24 +30,21 @@
          * 修改用户信息
          */
 		function userMessage(){
-			$userObj = M('userhome');
-			$back = $userObj -> userMsg($this->userId);
+			$back = $this -> userObj -> userMsg($this->userId);
 			VIEW::assign(array('userImg' => $back['B_ImgUrl'],
 							   'userName' => $back['B_Name'],
 							   'userTel' => $_SESSION['loginuser']));
 			VIEW::display('buyer/home-msgmod.php');
 		}
-		function modName(){
-			$userObj = M('userhome');
-			$back = $userObj->userMsg($this->userId);
+		function modName(){;
+			$back = $this -> userObj ->userMsg($this->userId);
 			VIEW::assign(array('userName' => $back['B_Name']));
 			VIEW::display('buyer/msgmod-mod.php');
 		}
 		function save_newName(){
 			$backvalue = array();
 			$newName = $_POST['newname'];
-			$userObj = M('userhome');
-			$userObj->saveNewName($newName,$this->userId);
+            $this -> userObj ->saveNewName($newName,$this->userId);
 			echo json_encode($backvalue);
 		}
 
@@ -61,8 +59,7 @@
 			$backvalue = array();
 			$oldPsd = $_POST['oldpwd'];
 			$newPsd = $_POST['newpwd'];
-			$userObj = M('userhome');
-			$backvalue = $userObj -> saveNewPassword($oldPsd,$newPsd,$this->userId);
+			$backvalue = $this -> userObj -> saveNewPassword($oldPsd,$newPsd,$this->userId);
 			echo json_encode($backvalue);
 		}
 		function user_loginOut(){
@@ -72,6 +69,12 @@
 		}
 
 		function location_Myevaluate(){
+            $back = $this -> userObj -> getEvaluateList($this->userId);
+            $back['buyerMsg']['count'] = count($back['evalList']);
+            $star = array(1,1,1,1,1);
+            VIEW::assign(array('buyerMsg' => $back['buyerMsg'],
+                               'evalList' => $back['evalList'],
+                                'star' => $star));
 			VIEW::display('buyer/home-myevaluate.php');
 		}
 
@@ -98,8 +101,7 @@
          * 保存用户反馈信息
          */
 		function saveUserMsg(){
-            $userObj = M('userhome');
-            $backvalue = $userObj->saveUserMsg($_POST['usercomment'],$_POST['usertel'],$this->userId);
+            $backvalue = $this -> userObj ->saveUserMsg($_POST['usercomment'],$_POST['usertel'],$this->userId);
             echo json_encode($backvalue);
         }
 
@@ -117,8 +119,7 @@
             $newImg = $_FILES['upload-img'];
             $indexObj = M("index");
             $newImg = $indexObj -> upload_imag($newImg);
-            $userObj=M('userhome');
-            $back = $userObj -> uploadUserImg($newImg,$this->userId);
+            $back = $this -> userObj -> uploadUserImg($newImg,$this->userId);
             if($back){
                 header("Location:admin.php?controller=userhome&method=userMessage");
             }
