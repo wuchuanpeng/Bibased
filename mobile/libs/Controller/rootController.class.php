@@ -92,5 +92,10 @@
             $gid = $_POST["gid"];
             echo $this -> rootObj -> updateMessageByGid($gid);
         }
+
+        function logout(){
+            $_SESSION['manager_id'] = "";
+            header('Location:manager.php');
+        }
     }
 ?>

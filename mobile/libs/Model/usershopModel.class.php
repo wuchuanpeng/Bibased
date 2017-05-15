@@ -245,9 +245,41 @@
             if ($result > 0 && $result2 > 0) {
                 DB::query("COMMIT");
             }else {
-                DB::query("COLLBACK");
+                DB::query("ROLLBACK");
             }
             return $result2;
+        }
+
+        /**
+         * 读取房间信息
+         * @param $sid
+         * @return mixed
+         */
+        function getRoomList($sid){
+            $sql = 'SELECT F_ID,T_ID,T_Price,T_Name,L_ImgUrl 
+                    FROM R_FarmShop,R_RomeType,R_UploadFiles 
+                    WHERE F_Status = 1 AND T_Status = 1 AND L_Status = 1 AND T_FID = F_ID AND T_ID = L_SpecificID AND L_Type = 1 AND F_SID = '.$sid;
+            $roomList = DB::findAll($sql);
+            if($roomList != ""){
+                foreach ($roomList as $key => $value){
+                    $sql = "SELECT H_ID FROM R_Order,R_HotelOrder 
+                        WHERE O_Status = 1 AND H_Status = 1 AND O_ID = H_OID AND H_TID = ".$value['T_ID']." AND O_FID = ".$value['F_ID'];
+                    $res = DB::findAll($sql);
+                    if($res == ""){
+                        $roomList[$key]['orderCount'] = 0;
+                    }else{
+                        $roomList[$key]['orderCount'] = count($res);
+                    }
+                    $sql = "SELECT R_No FROM R_Rome WHERE R_Status = 1 AND R_TID = ".$value['T_ID'];
+                    $result = DB::findAll($sql);
+                    if($result == ""){
+                        $roomList[$key]['roomCount'] = 0;
+                    }else{
+                        $roomList[$key]['roomCount'] = count($result);
+                    }
+                }
+            }
+            return $roomList;
         }
     }
  ?>

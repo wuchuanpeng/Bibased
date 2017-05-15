@@ -24,6 +24,8 @@
 		    $data["sid"] = $_GET['sid'];
 		    $sellerInfo = $this -> userObj -> getSellerInfoById($_GET['sid'], $this->userId);
 		    $data["sellerInfo"] = $sellerInfo;
+		    $roomList = $this -> userObj -> getRoomList($_GET['sid']);
+            $data['roomList'] = $roomList;
 		    VIEW::assign($data);
 			VIEW::display('buyer/restaurant.php');
 		}
@@ -60,6 +62,12 @@
             $sid  = $_POST["sid"];
             $result = $this -> userObj -> getProducts($sid);
             echo json_encode($result);
+        }
+
+        function saveOrderDetail(){
+            $sid = $_GET['sid'];
+            $tid = $_GET['tid'];
+            VIEW::display('buyer/order-hotel.php');
         }
 	}
  ?>

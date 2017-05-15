@@ -74,14 +74,14 @@
 			    </a>
 		    </div>
 		   
-		    <div style="background-color: #fff;">
+		    <div style="background-color: #fff;height: 40px;">
 					 <div class="res-thrtab" id="res-thrtab2">
 				 	 		<a class="control-item item-active common">农产品</a>
 							<a class="control-item" id="res-hotel">住宿</a>
 				 	</div>  
 			 </div>
 		</div>
-		<div class=" mui-row mui-fullscreen row-tab" id='row1' style="position: absolute;">  
+		<div class="mui-row mui-fullscreen row-tab" id='row1' style="position: absolute;">
 			<!-- 左侧选项卡 -->
 			<div class="mui-col-xs-3" style="padding-bottom: 50px;">
 				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
@@ -96,10 +96,27 @@
 		<div class="mui-row mui-fullscreen ishide row-tab"style="position: absolute;">
 		 	<div class="mui-scroll-wrapper"id="hotel-scroll">
 		 		<div class="mui-scroll">
-		 			<a class="hotel-bg"id="hotel-bg"href="admin.php?controller=userorder&method=location_hotelImg">
-						<div class="hotel-name">株洲9581商务酒店</div>
-					</a>
-					<div class="hotel-address"id="hotel-address">株洲市天元区泰山路557号</div>
+                    {if $roomList neq ""}
+                    {foreach from = $roomList item = value}
+                    <div class="room-item"  style="margin-bottom: 5px;">
+                        <a class="hotel-bg"  href="admin.php?controller=userorder&method=location_hotelImg">
+                            <img src="{$value.L_ImgUrl}">
+                            <div class="hotel-name">
+                                <span class="room-name">{$value.T_Name}</span>
+                                <span class="room-price">¥{$value.T_Price}</span>
+                            </div>
+                        </a>
+                        <div class="hotel-bottom">
+                            <span class="bottom-count">月售{$value.orderCount}单</span>
+                            {if $value.roomCount neq 0}
+                                <button type="button" class="btn-go" id="{$sid}-{$value.T_ID}">去预定</button>
+                            {else}
+                                <button type="button"  disabled>去预定</button>
+                            {/if}
+                        </div>
+                    </div>
+                    {/foreach}
+                    {/if}
 		 		</div>
 		 	</div>
 		</div>
@@ -140,15 +157,15 @@
 		document.getElementById("info-img").style.height=window.innerWidth*0.15+"px";
 		document.getElementById("info-img").style.width=window.innerWidth*0.15+"px";
 		document.getElementById("info-res").style.height=window.innerWidth*0.15+"px";
-		document.getElementById("info-res").style.marginTop=window.innerWidth*0.13+"px";
+		document.getElementById("info-res").style.marginTop=window.innerWidth*0.08+"px";
 		
 		mui.init();
 		//给上部分的背景设置高
-		document.getElementById('res-bg').style.height=window.innerWidth*0.5+'px';
+		document.getElementById('res-bg').style.height=window.innerWidth*0.35+'px';
 		//给左侧选项卡定位
 		var ltab=document.getElementsByClassName('row-tab');
 		for(var i=0;i<ltab.length;i++){
-			ltab[i].style.top=document.getElementById('res-bg').offsetHeight+55+'px';
+			ltab[i].style.top=document.getElementById('res-bg').offsetHeight+40+'px';
 		}
 		document.getElementById('res-detail').addEventListener('tap',function(){
 			mui.openWindow({
@@ -157,7 +174,17 @@
 			});
 		})
 		//住宿部分  让背景图片适配手机
-          document.getElementById('hotel-bg').style.height=window.innerWidth*(2/3)+'px';
+          var hotelBg = document.getElementsByClassName('hotel-bg');
+        for(var i = 0;i < hotelBg.length;i++){
+            hotelBg[i].style.height=window.innerWidth*0.4+'px';
+        }
+        mui('.room-item').on('tap','.btn-go',function () {
+           var id = this.id;
+           id = id.split("-");
+           var sid = id[0];
+           var tid = id[1];
+           window.location.href = "admin.php?controller=usershop&method=saveOrderDetail&sid="+sid+"&tid="+tid;
+        });
 		//取消菜单
 		//收藏
 		var ontrue= {$sellerInfo.isCollection};
@@ -313,10 +340,7 @@
 				deceleration:0.0005
 			});
 		})(mui);
-		//地址定位
-		document.getElementById('hotel-address').addEventListener('tap',function(){
-			window.location.href="http://apis.map.qq.com/tools/poimarker?type=0&marker=coord:39.96554,116.26719;title:株洲9581商务酒店;addr:北京市海淀区复兴路32号院|coord:39.87803,116.19025;title:成都园;addr:北京市丰台区射击场路15号北京园博园|coord:39.88129,116.27062;title:老成都;addr:北京市丰台区岳各庄梅市口路西府景园六号楼底商|coord:39.9982,116.19015;title:北京园博园成都园;addr:北京市丰台区园博园内&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp";
-		});
+
 	</script>	
 	<script type="text/javascript">
 		//左侧选项卡
@@ -324,7 +348,6 @@
             sid:sid
         }, "json", scrollcontent);
 		function scrollcontent(data){
-		    console.info(data);
 		    var str = "content";
 			var controls = document.getElementById("segmentedControls");
 			var contents = document.getElementById("segmentedControlContents");
@@ -344,7 +367,7 @@
 				var products = data[i-1].products;
 				for (j = 1; j <= products.length; j++) {
 					html.push('<li class="mui-table-view-cell test" pid = "'+ products[j-1].P_ID +'"  id="agrCommodity-'+i+'-'+j+'">'+
-					 '<img id="agrCommodity-'+i+'-'+j+'-1" class="menu-img" src="'+ products[j-1].L_ImgUrl +'" width="80px" height="80px"/>'+
+					 '<img id="agrCommodity-'+i+'-'+j+'-1" class="menu-img" src="'+ products[j-1].L_ImgUrl +'" width="60px" height="60px"/>'+
 					 '<p id="agrCommodity-'+i+'-'+j+'-2" class="menu-name">'+ products[j-1].P_Name +'</p>'+
 					 '<p id="agrCommodity-'+i+'-'+j+'-3" class="msale">月售'+ products[j-1].count +'</p>'+
 					 '<p id="agrCommodity-'+i+'-'+j+'-4" class="praise">&nbsp;&nbsp;&nbsp;&nbsp;</p>'+

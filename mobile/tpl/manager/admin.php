@@ -37,7 +37,7 @@
 		        </a>
 		    </li>
 		    <li><a href="#UserFeedback" data-toggle="tab">用户反馈</a></li>
-		    <a href="javascript:;" onclick="logout()" style="float: right;font-size: 16px;position:relative;top:10px;"> <span class="glyphicon glyphicon-log-out"></span>登出</a>
+		    <a href="manager.php?controller=root&method=logout" style="float: right;font-size: 16px;position:relative;top:10px;"> <span class="glyphicon glyphicon-log-out"></span>登出</a>
 		</ul>
 		<div id="myTabContent" class="tab-content">
 		    <div class="tab-pane fade in active" id="classManage">

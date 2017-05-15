@@ -19,55 +19,7 @@
 		
 		<div class="mui-content" id="detail-content">
 			<div id="slider" class="mui-slider mui-fullscreen">
-<!--				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">-->
-<!--					<div class="mui-scroll" style="width: 100%;background-color: #fff;">-->
-<!--						<a class="mui-control-item mui-active" href="#item1mobile" style="width: 50%;">-->
-<!--							订单状态-->
-<!--						</a>-->
-<!--						<a class="mui-control-item" href="#item2mobile" style="width: 50%;">-->
-<!--							订单详情-->
-<!--						</a>-->
-<!--				    </div>-->
-<!--				</div>-->
 				<div class="mui-slider-group" style="margin-top: -1px;">
-					<!-- 订单状态 -->
-					<!--<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-						<div id="scroll1" class="mui-scroll-wrapper">
-		 					<div class="mui-scroll cccc">
-								<ul class="mui-table-view">
-									<li class="mui-table-view-cell order-state-li">
-				 						<div class="order-state clearfloat">
-											<span class="state">订单已提交</span>
-											<span class="time">2017-03-19 19:21</span>
-										</div>
-										<p class="state-prompt">请耐心等待商家确认</p>
-									</li>
-									<li class="mui-table-view-cell order-state-li">
-										<span class="state">支付成功</span>
-										<span class="time">2017-03-19 19:21</span>
-									</li>
-									<li class="mui-table-view-cell order-state-li">
-										<div class="order-state clearfloat">
-											<span class="state">商家已接单</span>
-											<span class="time">2017-03-19 19:24</span>
-										</div>
-										<p class="state-prompt">商品准备中,配送进度请咨询商家</p>
-									</li>
-									<li class="mui-table-view-cell order-state-li">
-										<span class="state">订单完成</span>
-										<span class="time">2017-03-19 20:00</span>
-									</li>
-								</ul>
-							</div>
-							<div id="order-eval" class="bottom-div" style="display: none">
-								<a id="evalAccess" class="once-more">去评价</a>
-							</div>
-							<div id="order-sure" class="bottom-div" style="display:block">
-							<a id="refundMoney" class="refund-money">退款</a>
-								<a id="confirmReceipt" style="width: 100%" class="confirm-receipt">确认收货</a>
-							</div>
-						</div>
-					</div>-->
 					<!-- 订单详情页面 -->
 					<div id="item2mobile" class="mui-slider-item mui-control-content">
 						<div id="scroll2" class="mui-content mui-scroll-wrapper">
@@ -101,23 +53,8 @@
 											</div>
 										</div>	
 									</li>
-<!--									<li class="mui-table-view-cell commodity-cost">-->
-<!--										<div class="commodity-postage-cost clearfloat">-->
-<!--											<span class="order-cost">邮费</span>-->
-<!--											<span class="order-cost-money">¥ <span>22</span></span>-->
-<!--										</div>-->
-<!--										<div class="commodity-prepay-cost clearfloat">-->
-<!--											<span class="order-cost">预付</span>-->
-<!--											<span class="order-cost-money">¥ <span>5</span></span>-->
-<!--										</div>	-->
-<!--									</li>-->
-<!--									<li class="mui-table-view-cell commodity-discount">-->
-<!--										<span class="order-cost">优惠金额</span>-->
-<!--										<span class="order-cost-money">- ¥ <span>22</span></span>-->
-<!--									</li>-->
+
 									<li class="mui-table-view-cell commodity-total-price">
-<!--										<span class="total-price">总计 ¥ <span>320</span></span>-->
-<!--										<span class="total-discount">优惠 ¥ <span>22</span></span>-->
 										<span class="actual-pay">实付 ¥ <span>{$sellerInfo.O_RealPrice}</span></span>
 									</li>
 								</ul>
@@ -126,10 +63,6 @@
 									<span class="name-span">配送信息</span>
 								</div>
 								<ul class="mui-table-view item-package-msg">
-<!--									<li class="mui-table-view-cell package-msg-block">-->
-<!--										<span class="msg-block-left">期望时间</span>-->
-<!--										<span class="msg-block-right">立即配送</span>-->
-<!--									</li>-->
 									<li class="mui-table-view-cell package-msg-block">
 										<span class="msg-block-left">配送号码</span>
 										<span class="msg-block-right">{$buyerInfo.B_Tel}</span>
@@ -138,10 +71,6 @@
 										<span class="msg-block-left">配送地址</span>
 										<span class="msg-block-right">{$buyerInfo.B_ReceiptAddr}</span>
 									</li>
-<!--									<li class="mui-table-view-cell package-msg-block">-->
-<!--										<span class="msg-block-left">配送服务</span>-->
-<!--										<span class="msg-block-right">百世汇通</span>-->
-<!--									</li>-->
 								</ul>
 								<!-- 订单信息 -->
 								<div class="item-class-name">

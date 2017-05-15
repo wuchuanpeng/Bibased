@@ -29,22 +29,20 @@
             <ul class="mui-table-view">
                 <li class="mui-table-view-cell">
                     <span class="simg"></span>
-                    <span class="stxt">{$shopName}</span>
+                    <span class="stxt"></span>
                 </li>
-                {foreach from=$products item=product}
-
                 <li class="mui-table-view-cell smenu">
-                    <p style="text-align:left;">{$product.P_Name}</p>
-                    <p>x{$product.num}</p>
-                    <p>¥{$product.sum}</p>
+                    <p style="text-align:left;">是多少</p>
+                    <p>¥</p>
                 </li>
-
-                {foreachelse}
-                当前没有数据
-                {/foreach}
+                <li class="mui-table-view-cell scount">
+                    <span>+</span>
+                    <span class="room-count">1</span>
+                    <span style="font-size: 26px;">-</span>
+                </li>
                 <li class="mui-table-view-cell ssum">
-                    <p>总计¥{$sum}</p>
-                    <p class="sfact">实付<span class="smon">¥{$sum}</span></p>
+                    <p>总计¥</p>
+                    <p class="sfact">实付<span class="smon">¥</span></p>
                 </li>
             </ul>
             <ul class="mui-table-view">
@@ -52,33 +50,29 @@
                     <a class=""href="javascript:;"id="remark">
                         <span class="meal-num">收货地址</span>
                     </a>
-                    <textarea>{$userInfo.B_ReceiptAddr}</textarea>
+                    <textarea></textarea>
                 </li>
                 <li class="mui-table-view-cell">
                     <a class=""href="javascript:;"id="remark">
                         <span class="meal-num">电话</span>
                     </a>
-                    <input type="text" value="{$userInfo.B_Tel}"/>
+                    <input type="text" value=""/>
                 </li>
-
             </ul>
-
         </div>
     </div>
 </div>
 <div style="display: none">
     <form action="admin.php?controller=userorder&method=orderSubmit" method="post" id="order_submit">
-        {foreach from=$data item=value key=key}
-        <input type="hidden" name = "{$key}" value="{$value}"/>
-        {/foreach}
+
+        <input type="hidden" name = "" value=""/>
     </form>
 </div>
 <!--固定底部的提交订单-->
 <div class="sub-pay">
     <p class="sub-fav">
-        <!--                  优惠¥3-->
     </p>
-    <p class="wait-sub">待支付<span>¥{$sum}</span></p>
+    <p class="wait-sub">待支付<span>¥</span></p>
     <p class="sub-btn" id = "submit-order" >提交订单</p>
 </div>
 <!--支付方式选择-->
@@ -86,7 +80,7 @@
 
     <ul class="sub-table">
         <li class="sub-view">
-            <a href="#way-pay">
+            <a href="#way-pay" style="height: 100%;">
                 <p class="pay-txt">在线支付</p>
                 <p class="sub-choose"><img src="buyerstyle/image/choose.png"/></p>
             </a>
@@ -115,29 +109,6 @@
         bounce: false,
         indicators:true
     });
-    //点击选择支付方式
-    var subway=document.getElementsByClassName('sub-view');
-    for(var i=0;i<subway.length;i++){
-        subway[i].addEventListener('tap',function(){
-            for(var i=0;i<subway.length;i++){
-                subway[i].children[0].children[1].classList.add('ishide');
-            }
-            document.getElementById('way-txt').innerText=this.children[0].children[0].innerText;
-            mui('#way-pay').popover('hide');
-            this.children[0].children[1].classList.remove('ishide');
-        });
-    }
-    //点击选择用餐人数
-    var dtxt=document.getElementById('meal-txt');
-    mui('.dinner-table').on('tap','.dinner-view',function(){
-        var oth=this.parentNode.children;
-        for(var i=0;i<oth.length;i++){
-            oth[i].children[0].children[0].style.color='#000';
-        }
-        dtxt.innerHTML=this.children[0].children[0].innerHTML;
-        this.children[0].children[0].style.color='#14B2FD';
-    });
-
     //改变备注的内容
     document.getElementById("submit-order").addEventListener("tap", function () {
         $("#order_submit").submit();
